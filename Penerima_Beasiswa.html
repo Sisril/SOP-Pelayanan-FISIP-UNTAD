@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOP Calon Penerima Beasiswa FISIP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FFF8F0 0%, #FFE0B2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(255, 102, 0, 0.15);
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #FF6600 0%, #FF8533 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 15s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            position: relative;
+            z-index: 1;
+            opacity: 0.95;
+        }
+
+        /* Legend */
+        .legend {
+            background: #FFF3E6;
+            padding: 20px 40px;
+            border-bottom: 3px solid #FFE0B2;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95em;
+        }
+
+        .legend-box {
+            width: 40px;
+            height: 30px;
+            border-radius: 8px;
+            border: 2px solid #FF6600;
+        }
+
+        .legend-box.start {
+            background: linear-gradient(135deg, #FF6600, #FF8533);
+        }
+
+        .legend-box.process {
+            background: white;
+        }
+
+        .legend-box.end {
+            background: linear-gradient(135deg, #4CAF50, #66BB6A);
+        }
+
+        /* Content */
+        .content {
+            padding: 40px;
+        }
+
+        /* Info Boxes */
+        .info-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .info-box {
+            background: #FFF3E6;
+            border-left: 5px solid #FF6600;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(255, 102, 0, 0.1);
+        }
+
+        .info-box h3 {
+            color: #FF6600;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-box li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            font-size: 1.05em;
+            line-height: 1.6;
+        }
+
+        .info-box li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #FF6600;
+            font-weight: bold;
+        }
+
+        .timeline-box {
+            background: #FFF3E6;
+            border: 2px solid #FFE0B2;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(255, 102, 0, 0.1);
+        }
+
+        .timeline-box .time-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .timeline-box h3 {
+            color: #FF6600;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .timeline-box p {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Prinsip Box */
+        .prinsip-box {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            border: 2px solid #4CAF50;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.15);
+        }
+
+        .prinsip-box h3 {
+            color: #4CAF50;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .prinsip-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .prinsip-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #4CAF50;
+            transition: transform 0.3s ease;
+        }
+
+        .prinsip-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.2);
+        }
+
+        .prinsip-item .icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .prinsip-item strong {
+            color: #4CAF50;
+            font-size: 1.1em;
+            display: block;
+        }
+
+        /* Flowchart */
+        .flowchart-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        .flow-item {
+            width: 100%;
+            max-width: 700px;
+            position: relative;
+            animation: slideIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .flow-item:nth-child(1) { animation-delay: 0.1s; }
+        .flow-item:nth-child(2) { animation-delay: 0.15s; }
+        .flow-item:nth-child(3) { animation-delay: 0.2s; }
+        .flow-item:nth-child(4) { animation-delay: 0.25s; }
+        .flow-item:nth-child(5) { animation-delay: 0.3s; }
+        .flow-item:nth-child(6) { animation-delay: 0.35s; }
+        .flow-item:nth-child(7) { animation-delay: 0.4s; }
+        .flow-item:nth-child(8) { animation-delay: 0.45s; }
+        .flow-item:nth-child(9) { animation-delay: 0.5s; }
+        .flow-item:nth-child(10) { animation-delay: 0.55s; }
+        .flow-item:nth-child(11) { animation-delay: 0.6s; }
+        .flow-item:nth-child(12) { animation-delay: 0.65s; }
+        .flow-item:nth-child(13) { animation-delay: 0.7s; }
+        .flow-item:nth-child(14) { animation-delay: 0.75s; }
+        .flow-item:nth-child(15) { animation-delay: 0.8s; }
+        .flow-item:nth-child(16) { animation-delay: 0.85s; }
+        .flow-item:nth-child(17) { animation-delay: 0.9s; }
+        .flow-item:nth-child(18) { animation-delay: 0.95s; }
+        .flow-item:nth-child(19) { animation-delay: 1s; }
+        .flow-item:nth-child(20) { animation-delay: 1.05s; }
+        .flow-item:nth-child(21) { animation-delay: 1.1s; }
+        .flow-item:nth-child(22) { animation-delay: 1.15s; }
+        .flow-item:nth-child(23) { animation-delay: 1.2s; }
+        .flow-item:nth-child(24) { animation-delay: 1.25s; }
+        .flow-item:nth-child(25) { animation-delay: 1.3s; }
+        .flow-item:nth-child(26) { animation-delay: 1.35s; }
+        .flow-item:nth-child(27) { animation-delay: 1.4s; }
+        .flow-item:nth-child(28) { animation-delay: 1.45s; }
+
+        .step-box {
+            background: white;
+            border: 3px solid #FF6600;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(255, 102, 0, 0.15);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .step-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(255, 102, 0, 0.25);
+        }
+
+        .step-box.start {
+            background: linear-gradient(135deg, #FF6600, #FF8533);
+            color: white;
+            border: none;
+        }
+
+        .step-box.end {
+            background: linear-gradient(135deg, #4CAF50, #66BB6A);
+            color: white;
+            border: none;
+        }
+
+        .step-number {
+            background: #FF6600;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-right: 15px;
+            box-shadow: 0 3px 8px rgba(255, 102, 0, 0.3);
+        }
+
+        .step-box.start .step-number,
+        .step-box.end .step-number {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .step-content {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .step-text {
+            flex: 1;
+        }
+
+        .step-text h3 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            color: #FF6600;
+        }
+
+        .step-box.start .step-text h3,
+        .step-box.end .step-text h3 {
+            color: white;
+        }
+
+        .step-text p {
+            font-size: 1.05em;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .step-box.start .step-text p,
+        .step-box.end .step-text p {
+            color: white;
+        }
+
+        .actor-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #FFE0B2;
+            color: #FF6600;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-top: 10px;
+            box-shadow: 0 2px 5px rgba(255, 102, 0, 0.15);
+        }
+
+        .step-box.start .actor-label,
+        .step-box.end .actor-label {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+
+        /* Arrow */
+        .arrow {
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 20px solid #FF6600;
+            margin: 5px auto;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* Note Box */
+        .note-box {
+            background: #FFF8F0;
+            border-left: 5px solid #FF6600;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-style: italic;
+            font-size: 0.95em;
+            color: #666;
+        }
+
+        .note-box::before {
+            content: '⚠️ ';
+            font-style: normal;
+        }
+
+        .step-box.start .note-box,
+        .step-box.end .note-box {
+            background: rgba(255, 255, 255, 0.2);
+            border-left-color: white;
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .header p {
+                font-size: 1em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .info-section {
+                grid-template-columns: 1fr;
+            }
+
+            .prinsip-items {
+                grid-template-columns: 1fr;
+            }
+
+            .legend {
+                padding: 15px 20px;
+                gap: 15px;
+            }
+
+            .step-number {
+                width: 35px;
+                height: 35px;
+                font-size: 1em;
+            }
+
+            .step-text h3 {
+                font-size: 1.1em;
+            }
+
+            .step-text p {
+                font-size: 0.95em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🎓 Manual Prosedur Calon Penerima Beasiswa</h1>
+            <p>Fakultas Ilmu Sosial dan Ilmu Politik - Universitas Tadulako</p>
+        </div>
+
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-box start"></div>
+                <span>Langkah Awal</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box process"></div>
+                <span>Proses</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box end"></div>
+                <span>Selesai</span>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Prinsip Box -->
+            <div class="prinsip-box">
+                <h3>✨ Prinsip Seleksi Beasiswa</h3>
+                <div class="prinsip-items">
+                    <div class="prinsip-item">
+                        <div class="icon">🔍</div>
+                        <strong>Transparan</strong>
+                        <p style="color: #666; font-size: 0.9em; margin-top: 8px;">Proses seleksi terbuka dan jelas</p>
+                    </div>
+                    <div class="prinsip-item">
+                        <div class="icon">⚖️</div>
+                        <strong>Objektif</strong>
+                        <p style="color: #666; font-size: 0.9em; margin-top: 8px;">Berdasarkan kriteria yang ditetapkan</p>
+                    </div>
+                    <div class="prinsip-item">
+                        <div class="icon">📊</div>
+                        <strong>Akuntabel</strong>
+                        <p style="color: #666; font-size: 0.9em; margin-top: 8px;">Dapat dipertanggungjawabkan</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Section -->
+            <div class="info-section">
+                <div class="info-box">
+                    <h3>👥 Pelaksana</h3>
+                    <ul>
+                        <li>Mahasiswa</li>
+                        <li>Ketua Jurusan/Koordinator Prodi</li>
+                        <li>POKJA Kemahasiswaan</li>
+                        <li>KABAG FISIP</li>
+                        <li>Wakil Dekan Bidang Kemahasiswaan</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h3>🎯 Ruang Lingkup</h3>
+                    <ul>
+                        <li>Pengumuman penerimaan beasiswa</li>
+                        <li>Penetapan kuota per jurusan/prodi</li>
+                        <li>Pelaksanaan seleksi di tingkat jurusan</li>
+                        <li>Verifikasi dan rekapitulasi calon</li>
+                        <li>Pengumuman dan distribusi SK</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-box">
+                    <div class="time-icon">⏱️</div>
+                    <h3>Waktu Pelayanan</h3>
+                    <p>Maksimal 13 Hari Kerja</p>
+                    <small style="color: #666; margin-top: 5px; display: block;">untuk seluruh proses seleksi</small>
+                </div>
+            </div>
+
+            <!-- Flowchart -->
+            <div class="flowchart-container">
+                <!-- Step 1 -->
+                <div class="flow-item">
+                    <div class="step-box start">
+                        <div class="step-content">
+                            <div class="step-number">1</div>
+                            <div class="step-text">
+                                <h3>Penerimaan Surat dari BAAK</h3>
+                                <p>FISIP menerima surat pemberitahuan penerimaan beasiswa dari BAAK Universitas Tadulako</p>
+                                <div class="actor-label">
+                                    <span>📧</span>
+                                    <span>KABAG & Wakil Dekan Kemahasiswaan</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 2 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">2</div>
+                            <div class="step-text">
+                                <h3>Rapat Koordinasi Penetapan Kuota</h3>
+                                <p>Wakil Dekan Bidang Kemahasiswaan, KABAG, dan Ketua Jurusan/Koordinator Program Studi melakukan rapat koordinasi untuk penetapan kuota per jurusan/program studi</p>
+                                <div class="actor-label">
+                                    <span>👥</span>
+                                    <span>Wadek Bima, KABAG, Kajur/KPS</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 3 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">3</div>
+                            <div class="step-text">
+                                <h3>Penyampaian Surat ke Jurusan/Prodi</h3>
+                                <p>Wakil Dekan Bidang Kemahasiswaan menyampaikan surat resmi tentang penerimaan beasiswa ke Jurusan/Program Studi disertai syarat kelengkapan berkas dan formulir</p>
+                                <div class="actor-label">
+                                    <span>📨</span>
+                                    <span>Wakil Dekan Bidang Kemahasiswaan</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 4 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">4</div>
+                            <div class="step-text">
+                                <h3>Pengumuman di Fakultas</h3>
+                                <p>POKJA Kemahasiswaan membuat pengumuman penerimaan beasiswa di fakultas dan menginformasikan bahwa seleksi dilaksanakan di jurusan/program studi masing-masing</p>
+                                <div class="actor-label">
+                                    <span>📢</span>
+                                    <span>POKJA Kemahasiswaan</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 5 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">5</div>
+                            <div class="step-text">
+                                <h3>Pengumuman di Jurusan/Prodi</h3>
+                                <p>Jurusan/Program Studi mengumumkan penerimaan beasiswa kepada mahasiswa</p>
+                                <div class="actor-label">
+                                    <span>📣</span>
+                                    <span>Jurusan/Program Studi</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 6 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">6</div>
+                            <div class="step-text">
+                                <h3>Pengumpulan Berkas oleh Mahasiswa</h3>
+                                <p>Mahasiswa mengumpulkan berkas persyaratan beasiswa ke Jurusan/Program Studi sesuai dengan batas waktu yang ditentukan</p>
+                                <div class="actor-label">
+                                    <span>👤📄</span>
+                                    <span>Mahasiswa</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 7 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">7</div>
+                            <div class="step-text">
+                                <h3>Seleksi dan Verifikasi di Jurusan/Prodi</h3>
+                                <p>Jurusan/Program Studi melakukan seleksi dan memverifikasi kelengkapan berkas serta menilai kelayakan mahasiswa berdasarkan kriteria yang ditetapkan</p>
+                                <div class="actor-label">
+                                    <span>✅</span>
+                                    <span>Jurusan/Program Studi</span>
+                                </div>
+                                <div class="note-box">
+                                    Proses seleksi maksimal 6 hari kerja
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 8 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">8</div>
+                            <div class="step-text">
+                                <h3>Pengumuman Hasil dan Usulan ke Wadek</h3>
+                                <p>Jurusan/Program Studi mengumumkan hasil seleksi calon penerima beasiswa di tingkat jurusan dan mengusulkan daftar nama kepada Wakil Dekan Bidang Kemahasiswaan</p>
+                                <div class="actor-label">
+                                    <span>📋</span>
+                                    <span>Jurusan/Program Studi</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 9 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">9</div>
+                            <div class="step-text">
+                                <h3>Rekapitulasi oleh POKJA Kemahasiswaan</h3>
+                                <p>POKJA Kemahasiswaan menerima usulan dari seluruh jurusan/program studi dan melakukan rekapitulasi nama calon penerima beasiswa</p>
+                                <div class="actor-label">
+                                    <span>📊</span>
+                                    <span>POKJA Kemahasiswaan</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 10 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">10</div>
+                            <div class="step-text">
+                                <h3>Verifikasi Ulang oleh KABAG dan POKJA</h3>
+                                <p>KABAG bersama POKJA Kemahasiswaan melakukan verifikasi ulang kelengkapan berkas dan membuat daftar rekapitulasi lengkap</p>
+                                <div class="actor-label">
+                                    <span>🔍</span>
+                                    <span>KABAG & POKJA Kemahasiswaan</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 11 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">11</div>
+                            <div class="step-text">
+                                <h3>Penelitian dan Persetujuan Wadek</h3>
+                                <p>Wakil Dekan Bidang Kemahasiswaan meneliti kelayakan calon penerima beasiswa dan menyetujui daftar nama yang akan diusulkan</p>
+                                <div class="actor-label">
+                                    <span>✅</span>
+                                    <span>Wakil Dekan Bidang Kemahasiswaan</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 12 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">12</div>
+                            <div class="step-text">
+                                <h3>Penyampaian ke BAAK</h3>
+                                <p>KABAG menyampaikan daftar nama calon penerima beasiswa yang telah disetujui beserta berkas kelengkapan dokumen ke BAAK sesuai dengan ketentuan</p>
+                                <div class="actor-label">
+                                    <span>📨</span>
+                                    <span>KABAG FISIP</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 13 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">13</div>
+                            <div class="step-text">
+                                <h3>Penerbitan SK Rektor</h3>
+                                <p>Universitas menerbitkan SK Rektor tentang penetapan penerima beasiswa dan mengirimkan SK ke FISIP melalui KABAG</p>
+                                <div class="actor-label">
+                                    <span>🏛️</span>
+                                    <span>Universitas Tadulako</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 14 -->
+                <div class="flow-item">
+                    <div class="step-box end">
+                        <div class="step-content">
+                            <div class="step-number">14</div>
+                            <div class="step-text">
+                                <h3>Pengumuman dan Distribusi SK</h3>
+                                <p>POKJA Kemahasiswaan mengumumkan penerima beasiswa dan mendistribusikan SK kepada mahasiswa yang bersangkutan</p>
+                                <div class="actor-label">
+                                    <span>🎉📜</span>
+                                    <span>POKJA Kemahasiswaan & Mahasiswa</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Info -->
+            <div style="margin-top: 50px; padding: 30px; background: linear-gradient(135deg, #FFE0B2 0%, #FFCC80 100%); border-radius: 15px; border: 2px solid #FF6600;">
+                <h3 style="color: #FF6600; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-size: 1.4em;">
+                    <span>📌</span>
+                    <span>Tahapan Kunci Proses Seleksi</span>
+                </h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
+                    <div style="background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #FF6600;">
+                        <strong style="color: #FF6600; font-size: 1.1em;">📊 Penetapan Kuota:</strong><br><br>
+                        <span style="color: #333;">Koordinasi Wadek Bima, KABAG, dan Ketua Jurusan/KPS untuk penetapan kuota per jurusan</span>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #FF6600;">
+                        <strong style="color: #FF6600; font-size: 1.1em;">✅ Seleksi Jurusan:</strong><br><br>
+                        <span style="color: #333;">Maksimal 6 hari kerja untuk verifikasi kelengkapan berkas dan penilaian kelayakan</span>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #FF6600;">
+                        <strong style="color: #FF6600; font-size: 1.1em;">🔍 Verifikasi Ulang:</strong><br><br>
+                        <span style="color: #333;">KABAG dan POKJA Kemahasiswaan melakukan verifikasi ulang kelengkapan berkas</span>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #FF6600;">
+                        <strong style="color: #FF6600; font-size: 1.1em;">🏛️ SK Rektor:</strong><br><br>
+                        <span style="color: #333;">Universitas menerbitkan SK Rektor tentang penetapan penerima beasiswa</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Info -->
+            <div style="margin-top: 30px; padding: 30px; background: #FFF3E6; border-radius: 15px; border-left: 5px solid #FF6600;">
+                <h3 style="color: #FF6600; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                    <span>📚</span>
+                    <span>Referensi</span>
+                </h3>
+                <ul style="list-style: none; padding: 0; line-height: 1.8;">
+                    <li style="padding: 5px 0;">✓ Panduan Akademik FISIP Universitas Tadulako 2024-2025</li>
+                    <li style="padding: 5px 0;">✓ Pedoman dan Peraturan Akademik Universitas Tadulako 2024-2025</li>
+                    <li style="padding: 5px 0;">✓ Surat Keputusan Rektor tentang Beasiswa</li>
+                </ul>
+                <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #FFE0B2;">
+                    <p style="text-align: center; color: #666; margin-bottom: 10px;"><strong>Tanggal Pembuatan:</strong> 28 November 2025 | <strong>Revisi:</strong> Rev. 0</p>
+                    <p style="text-align: center; color: #666; font-size: 0.95em;">
+                        📞 Untuk pertanyaan atau kendala, hubungi POKJA Kemahasiswaan atau Jurusan/Program Studi
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add smooth scroll behavior and animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate elements on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateX(0)';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.flow-item').forEach(item => {
+                observer.observe(item);
+            });
+        });
+    </script>
+</body>
+</html>

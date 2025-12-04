@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOP Penugasan Dosen Pengampu Mata Kuliah FISIP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FFF8F0 0%, #FFE0B2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(255, 102, 0, 0.15);
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #FF6600 0%, #FF8533 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 15s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            position: relative;
+            z-index: 1;
+            opacity: 0.95;
+        }
+
+        /* Legend */
+        .legend {
+            background: #FFF3E6;
+            padding: 20px 40px;
+            border-bottom: 3px solid #FFE0B2;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95em;
+        }
+
+        .legend-box {
+            width: 40px;
+            height: 30px;
+            border-radius: 8px;
+            border: 2px solid #FF6600;
+        }
+
+        .legend-box.start {
+            background: linear-gradient(135deg, #FF6600, #FF8533);
+        }
+
+        .legend-box.process {
+            background: white;
+        }
+
+        .legend-box.end {
+            background: linear-gradient(135deg, #4CAF50, #66BB6A);
+        }
+
+        /* Content */
+        .content {
+            padding: 40px;
+        }
+
+        /* Warning Box */
+        .warning-box {
+            background: linear-gradient(135deg, #FFE0B2 0%, #FFCC80 100%);
+            border: 2px solid #FF6600;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(255, 102, 0, 0.15);
+        }
+
+        .warning-box h3 {
+            color: #FF6600;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .warning-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .warning-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #FF6600;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        /* Info Boxes */
+        .info-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .info-box {
+            background: #FFF3E6;
+            border-left: 5px solid #FF6600;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(255, 102, 0, 0.1);
+        }
+
+        .info-box h3 {
+            color: #FF6600;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-box li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            font-size: 1.05em;
+            line-height: 1.6;
+        }
+
+        .info-box li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #FF6600;
+            font-weight: bold;
+        }
+
+        .timeline-box {
+            background: #FFF3E6;
+            border: 2px solid #FFE0B2;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(255, 102, 0, 0.1);
+        }
+
+        .timeline-box .time-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .timeline-box h3 {
+            color: #FF6600;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .timeline-box p {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Flowchart */
+        .flowchart-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        .flow-item {
+            width: 100%;
+            max-width: 700px;
+            position: relative;
+            animation: slideIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .flow-item:nth-child(1) { animation-delay: 0.1s; }
+        .flow-item:nth-child(2) { animation-delay: 0.15s; }
+        .flow-item:nth-child(3) { animation-delay: 0.2s; }
+        .flow-item:nth-child(4) { animation-delay: 0.25s; }
+        .flow-item:nth-child(5) { animation-delay: 0.3s; }
+        .flow-item:nth-child(6) { animation-delay: 0.35s; }
+        .flow-item:nth-child(7) { animation-delay: 0.4s; }
+        .flow-item:nth-child(8) { animation-delay: 0.45s; }
+        .flow-item:nth-child(9) { animation-delay: 0.5s; }
+        .flow-item:nth-child(10) { animation-delay: 0.55s; }
+        .flow-item:nth-child(11) { animation-delay: 0.6s; }
+        .flow-item:nth-child(12) { animation-delay: 0.65s; }
+        .flow-item:nth-child(13) { animation-delay: 0.7s; }
+        .flow-item:nth-child(14) { animation-delay: 0.75s; }
+        .flow-item:nth-child(15) { animation-delay: 0.8s; }
+        .flow-item:nth-child(16) { animation-delay: 0.85s; }
+
+        .step-box {
+            background: white;
+            border: 3px solid #FF6600;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(255, 102, 0, 0.15);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .step-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(255, 102, 0, 0.25);
+        }
+
+        .step-box.start {
+            background: linear-gradient(135deg, #FF6600, #FF8533);
+            color: white;
+            border: none;
+        }
+
+        .step-box.end {
+            background: linear-gradient(135deg, #4CAF50, #66BB6A);
+            color: white;
+            border: none;
+        }
+
+        .step-number {
+            background: #FF6600;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-right: 15px;
+            box-shadow: 0 3px 8px rgba(255, 102, 0, 0.3);
+        }
+
+        .step-box.start .step-number,
+        .step-box.end .step-number {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .step-content {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .step-text {
+            flex: 1;
+        }
+
+        .step-text h3 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            color: #FF6600;
+        }
+
+        .step-box.start .step-text h3,
+        .step-box.end .step-text h3 {
+            color: white;
+        }
+
+        .step-text p {
+            font-size: 1.05em;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .step-box.start .step-text p,
+        .step-box.end .step-text p {
+            color: white;
+        }
+
+        .actor-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #FFE0B2;
+            color: #FF6600;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-top: 10px;
+            box-shadow: 0 2px 5px rgba(255, 102, 0, 0.15);
+        }
+
+        .step-box.start .actor-label,
+        .step-box.end .actor-label {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+
+        /* Arrow */
+        .arrow {
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 20px solid #FF6600;
+            margin: 5px auto;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* Note Box */
+        .note-box {
+            background: #FFF8F0;
+            border-left: 5px solid #FF6600;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-style: italic;
+            font-size: 0.95em;
+            color: #666;
+        }
+
+        .note-box::before {
+            content: '⚠️ ';
+            font-style: normal;
+        }
+
+        .step-box.start .note-box,
+        .step-box.end .note-box {
+            background: rgba(255, 255, 255, 0.2);
+            border-left-color: white;
+            color: white;
+        }
+
+        /* Sub-steps */
+        .sub-steps {
+            margin-top: 15px;
+            padding-left: 20px;
+            border-left: 3px solid #FFE0B2;
+        }
+
+        .sub-step {
+            padding: 8px 0;
+            font-size: 0.95em;
+            color: #555;
+        }
+
+        .step-box.start .sub-step,
+        .step-box.end .sub-step {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .header p {
+                font-size: 1em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .info-section {
+                grid-template-columns: 1fr;
+            }
+
+            .warning-items {
+                grid-template-columns: 1fr;
+            }
+
+            .legend {
+                padding: 15px 20px;
+                gap: 15px;
+            }
+
+            .step-number {
+                width: 35px;
+                height: 35px;
+                font-size: 1em;
+            }
+
+            .step-text h3 {
+                font-size: 1.1em;
+            }
+
+            .step-text p {
+                font-size: 0.95em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>👨‍🏫 SOP Penugasan Dosen Pengampu Mata Kuliah</h1>
+            <p>Fakultas Ilmu Sosial dan Ilmu Politik - Universitas Tadulako</p>
+        </div>
+
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-box start"></div>
+                <span>Langkah Awal</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box process"></div>
+                <span>Proses</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box end"></div>
+                <span>Selesai</span>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Warning Box -->
+            <div class="warning-box">
+                <h3>⚠️ CATATAN PENTING PENUGASAN DOSEN</h3>
+                <div class="warning-items">
+                    <div class="warning-item">
+                        <strong>📅 Setiap Semester:</strong> Penugasan dilakukan setiap semester (ganjil dan genap)
+                    </div>
+                    <div class="warning-item">
+                        <strong>🎯 Kompetensi:</strong> WAJIB mempertimbangkan kompetensi dan keahlian dosen sesuai mata kuliah
+                    </div>
+                    <div class="warning-item">
+                        <strong>⚖️ Beban Kerja:</strong> Distribusi beban kerja harus MERATA dan tidak melebihi batas maksimal
+                    </div>
+                    <div class="warning-item">
+                        <strong>👥 KBK:</strong> Kelompok Bidang Keahlian berperan menentukan dosen pengampu mata kuliah pilihan
+                    </div>
+                    <div class="warning-item">
+                        <strong>🏛️ Rapat Jurusan:</strong> Forum penetapan resmi dosen pengampu
+                    </div>
+                    <div class="warning-item">
+                        <strong>📝 SK WAJIB:</strong> SK jadwal kuliah diterbitkan SEBELUM pengisian KRS mahasiswa
+                    </div>
+                    <div class="warning-item">
+                        <strong>📊 Evaluasi:</strong> Kinerja dosen semester sebelumnya jadi bahan pertimbangan
+                    </div>
+                    <div class="warning-item">
+                        <strong>🚫 Tidak Dapat:</strong> Dosen yang sedang tugas belajar/cuti tidak dapat ditugaskan
+                    </div>
+                    <div class="warning-item">
+                        <strong>🔄 Perubahan:</strong> Perubahan di tengah semester hanya dengan persetujuan Wakil Dekan Bidang Akademik
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Section -->
+            <div class="info-section">
+                <div class="info-box">
+                    <h3>👥 Pelaksana</h3>
+                    <ul>
+                        <li>Kelompok Bidang Keahlian (KBK)</li>
+                        <li>Koordinator Program Studi</li>
+                        <li>Sekretaris Jurusan</li>
+                        <li>Ketua Jurusan</li>
+                        <li>Staf Administrasi Jurusan/Prodi</li>
+                        <li>Dosen Program Studi</li>
+                        <li>Wakil Dekan Bidang Akademik</li>
+                        <li>POKJA/Staf Sub Bagian Akademik</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h3>📋 Persyaratan Dosen</h3>
+                    <ul>
+                        <li>Kompetensi sesuai mata kuliah</li>
+                        <li>Status aktif (tidak tugas belajar/cuti)</li>
+                        <li>Beban kerja tidak melebihi maksimal</li>
+                        <li>Kualifikasi minimal S2 untuk MK S1</li>
+                        <li>Evaluasi kinerja baik semester lalu</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-box">
+                    <div class="time-icon">⏱️</div>
+                    <h3>Waktu Pelayanan</h3>
+                    <p>Maksimal 13 Hari Kerja</p>
+                    <small style="color: #666; margin-top: 5px; display: block;">5-7 hari sebelum pengisian KRS</small>
+                </div>
+            </div>
+
+            <!-- Flowchart -->
+            <div class="flowchart-container">
+                <!-- Step 1 -->
+                <div class="flow-item">
+                    <div class="step-box start">
+                        <div class="step-content">
+                            <div class="step-number">1</div>
+                            <div class="step-text">
+                                <h3>KBK Menentukan Dosen Pengampu MK Pilihan</h3>
+                                <p>Kelompok Bidang Keahlian (KBK) atau Kelompok Dosen melakukan rapat internal membahas mata kuliah pilihan yang akan ditawarkan, dosen pengampu untuk setiap MK pilihan, pertimbangan keahlian dan beban kerja dosen. Hasil rapat dijadikan usulan dan diserahkan kepada Koordinator Prodi</p>
+                                <div class="actor-label">
+                                    <span>👥</span>
+                                    <span>Kelompok Bidang Keahlian (KBK)</span>
+                                </div>
+                                <div class="note-box">
+                                    Waktu: 14 hari sebelum Rapat Jurusan/Program Studi
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 2 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">2</div>
+                            <div class="step-text">
+                                <h3>Koordinator Prodi Mengumpulkan Informasi</h3>
+                                <p>Koordinator Program Studi meminta informasi dari Staf Administrasi: jadwal kuliah tahun ajaran sebelumnya, data dosen pengampu TA lalu, laporan PBM dosen (evaluasi), beban kerja dosen. Kemudian mengidentifikasi kebutuhan dosen pengampu untuk semester berjalan</p>
+                                <div class="actor-label">
+                                    <span>📊</span>
+                                    <span>Koordinator Program Studi & Staf Admin</span>
+                                </div>
+                                <div class="note-box">
+                                    Waktu: 10 hari sebelum Rapat Jurusan/Program Studi
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 3 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">3</div>
+                            <div class="step-text">
+                                <h3>Penyusunan Draft Dosen Pengampu</h3>
+                                <p>Koordinator Prodi bersama Sekretaris Jurusan menyusun draft usulan berisi daftar mata kuliah wajib dan pilihan, usulan dosen pengampu, jumlah SKS dan beban kerja, jadwal kuliah (hari, jam, ruangan) dengan pertimbangan kesesuaian kompetensi, distribusi merata, usulan KBK, evaluasi kinerja, dan ketersediaan dosen</p>
+                                <div class="actor-label">
+                                    <span>✍️</span>
+                                    <span>Koordinator Prodi & Sekretaris Jurusan</span>
+                                </div>
+                                <div class="note-box">
+                                    Waktu: 7-10 hari sebelum Rapat Jurusan/Program Studi
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 4 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">4</div>
+                            <div class="step-text">
+                                <h3>Penyerahan Draft kepada Ketua Jurusan</h3>
+                                <p>Koordinator Program Studi menyerahkan draft kepada Ketua Jurusan dilengkapi dengan daftar lengkap mata kuliah dan dosen pengampu, beban kerja dosen per semester, dan jadwal kuliah yang telah disusun. Ketua Jurusan memeriksa draft sebagai bahan Rapat Jurusan dan dapat meminta perbaikan jika diperlukan</p>
+                                <div class="actor-label">
+                                    <span>📨</span>
+                                    <span>Koordinator Prodi & Ketua Jurusan</span>
+                                </div>
+                                <div class="note-box">
+                                    Waktu: 5-7 hari sebelum pengisian KRS mahasiswa
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 5 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">5</div>
+                            <div class="step-text">
+                                <h3>Rapat Jurusan/Prodi Menetapkan Pengampu</h3>
+                                <p>Ketua Jurusan memimpin Rapat dengan peserta: Kajur, Sekjur, Koor Prodi, dan seluruh dosen. Rapat membahas draft usulan, distribusi beban kerja, kompetensi dosen, jadwal kuliah, dan masukan dosen. Rapat menetapkan dosen pengampu setiap MK, tim pengampu, dan jadwal kuliah final. Keputusan dituangkan dalam Berita Acara Rapat Jurusan</p>
+                                <div class="actor-label">
+                                    <span>🏛️</span>
+                                    <span>Ketua Jurusan & Seluruh Dosen</span>
+                                </div>
+                                <div class="note-box">
+                                    Ini adalah forum penetapan resmi dosen pengampu mata kuliah
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 6 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">6</div>
+                            <div class="step-text">
+                                <h3>Penyusunan Daftar oleh Staf Administrasi</h3>
+                                <p>Hasil keputusan Rapat Jurusan diterima oleh Koordinator Prodi dan diserahkan kepada Staf Administrasi. Staf Administrasi menyusun daftar susunan dosen pengampu mata kuliah, beban kerja dosen per semester, dan jadwal kuliah lengkap (hari, jam, ruangan, dosen) serta memastikan kelengkapan data</p>
+                                <div class="actor-label">
+                                    <span>📝</span>
+                                    <span>Staf Administrasi Jurusan/Prodi</span>
+                                </div>
+                                <div class="note-box">
+                                    Waktu: 1-2 hari sebelum batas akhir jadwal
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 7 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">7</div>
+                            <div class="step-text">
+                                <h3>Pengajuan ke Wakil Dekan untuk SK</h3>
+                                <p>Staf Administrasi menyerahkan daftar susunan dosen pengampu, beban kerja dosen, jadwal kuliah lengkap, dan Berita Acara Rapat Jurusan kepada Wakil Dekan Bidang Akademik. Wakil Dekan memeriksa kelengkapan dokumen, memberikan persetujuan, dan Sub Bagian Akademik FISIP memproses pembuatan SK jadwal kuliah dan penugasan dosen</p>
+                                <div class="actor-label">
+                                    <span>✅</span>
+                                    <span>Staf Admin & Wakil Dekan Bidang Akademik</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 8 -->
+                <div class="flow-item">
+                    <div class="step-box end">
+                        <div class="step-content">
+                            <div class="step-number">8</div>
+                            <div class="step-text">
+                                <h3>Penerbitan dan Distribusi SK Jadwal Kuliah</h3>
+                                <p>Sub Bagian Akademik FISIP menerbitkan SK jadwal kuliah yang ditandatangani Wakil Dekan berisi daftar mata kuliah, dosen pengampu, jadwal kuliah, dan masa berlaku SK. SK didistribusikan kepada dosen pengampu, Ketua Jurusan, dan Koordinator Prodi. Jadwal kuliah ditempel di papan pengumuman dan di-upload di website FISIP dan SIAKAD</p>
+                                <div class="actor-label">
+                                    <span>📋✅</span>
+                                    <span>POKJA/Sub Bagian Akademik</span>
+                                </div>
+                                <div class="note-box">
+                                    Sebelum pengisian KRS mahasiswa. Dosen dapat mengajar dan mahasiswa dapat isi KRS
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Info -->
+            <div style="margin-top: 50px; padding: 30px; background: linear-gradient(135deg, #FFE0B2 0%, #FFCC80 100%); border-radius: 15px; border: 2px solid #FF6600;">
+                <h3 style="color: #FF6600; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-size: 1.4em;">
+                    <span>📌</span>
+                    <span>Pertimbangan Penugasan Dosen</span>
+                </h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
+                    <div style="background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #FF6600;">
+                        <strong style="color: #FF6600; font-size: 1.1em;">🎯 Kesesuaian Kompetensi:</strong><br><br>
+                        <span style="color: #333;">Kompetensi dan keahlian dosen harus sesuai dengan mata kuliah</span>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #FF6600;">
+                        <strong style="color: #FF6600; font-size: 1.1em;">⚖️ Distribusi Merata:</strong><br><br>
+                        <span style="color: #333;">Beban kerja dosen harus terdistribusi secara merata</span>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #FF6600;">
+                        <strong style="color: #FF6600; font-size: 1.1em;">👥 Usulan KBK:</strong><br><br>
+                        <span style="color: #333;">Mempertimbangkan usulan dari Kelompok Bidang Keahlian</span>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #FF6600;">
+                        <strong style="color: #FF6600; font-size: 1.1em;">📊 Evaluasi Kinerja:</strong><br><br>
+                        <span style="color: #333;">Hasil evaluasi PBM semester sebelumnya menjadi pertimbangan</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Info -->
+            <div style="margin-top: 30px; padding: 30px; background: #FFF3E6; border-radius: 15px; border-left: 5px solid #FF6600;">
+                <h3 style="color: #FF6600; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                    <span>📚</span>
+                    <span>Referensi</span>
+                </h3>
+                <ul style="list-style: none; padding: 0; line-height: 1.8;">
+                    <li style="padding: 5px 0;">✓ Pedoman dan Peraturan Akademik Universitas Tadulako Tahun 2024-2025</li>
+                    <li style="padding: 5px 0;">✓ Panduan Akademik FISIP Universitas Tadulako Tahun 2024-2025</li>
+                    <li style="padding: 5px 0;">✓ Peraturan tentang Beban Kerja Dosen</li>
+                    <li style="padding: 5px 0;">✓ Kalender Akademik Universitas Tadulako</li>
+                </ul>
+                <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #FFE0B2;">
+                    <p style="text-align: center; color: #666; margin-bottom: 10px;"><strong>Tanggal Pembuatan:</strong> 28 November 2025 | <strong>Revisi:</strong> Rev. 0</p>
+                    <p style="text-align: center; color: #666; font-size: 0.95em;">
+                        📞 Untuk pertanyaan atau kendala, hubungi Koordinator Program Studi atau Ketua Jurusan
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add smooth scroll behavior and animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate elements on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateX(0)';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.flow-item').forEach(item => {
+                observer.observe(item);
+            });
+        });
+    </script>
+</body>
+</html>

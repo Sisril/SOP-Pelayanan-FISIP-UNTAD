@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOP Pengelolaan Dana Kegiatan Kemahasiswaan FISIP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FFF8F0 0%, #FFE0B2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(255, 102, 0, 0.15);
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #FF6600 0%, #FF8533 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 15s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            position: relative;
+            z-index: 1;
+            opacity: 0.95;
+        }
+
+        /* Legend */
+        .legend {
+            background: #FFF3E6;
+            padding: 20px 40px;
+            border-bottom: 3px solid #FFE0B2;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95em;
+        }
+
+        .legend-box {
+            width: 40px;
+            height: 30px;
+            border-radius: 8px;
+            border: 2px solid #FF6600;
+        }
+
+        .legend-box.start {
+            background: linear-gradient(135deg, #FF6600, #FF8533);
+        }
+
+        .legend-box.process {
+            background: white;
+        }
+
+        .legend-box.end {
+            background: linear-gradient(135deg, #4CAF50, #66BB6A);
+        }
+
+        /* Content */
+        .content {
+            padding: 40px;
+        }
+
+        /* Info Boxes */
+        .info-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .info-box {
+            background: #FFF3E6;
+            border-left: 5px solid #FF6600;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(255, 102, 0, 0.1);
+        }
+
+        .info-box h3 {
+            color: #FF6600;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-box li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            font-size: 1.05em;
+            line-height: 1.6;
+        }
+
+        .info-box li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #FF6600;
+            font-weight: bold;
+        }
+
+        .timeline-box {
+            background: #FFF3E6;
+            border: 2px solid #FFE0B2;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(255, 102, 0, 0.1);
+        }
+
+        .timeline-box h3 {
+            color: #FF6600;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .timeline-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #FFE0B2;
+            font-size: 0.95em;
+        }
+
+        .timeline-item:last-child {
+            border-bottom: none;
+        }
+
+        .timeline-item strong {
+            color: #FF6600;
+        }
+
+        /* Tab Navigation */
+        .tab-nav {
+            background: #FFF3E6;
+            padding: 15px 40px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            border-bottom: 2px solid #FFE0B2;
+        }
+
+        .tab-btn {
+            background: white;
+            border: 2px solid #FF6600;
+            color: #FF6600;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.95em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn:hover {
+            background: #FFE0B2;
+        }
+
+        .tab-btn.active {
+            background: #FF6600;
+            color: white;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Flowchart */
+        .flowchart-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        .flow-item {
+            width: 100%;
+            max-width: 700px;
+            position: relative;
+            animation: slideIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .flow-item:nth-child(1) { animation-delay: 0.1s; }
+        .flow-item:nth-child(2) { animation-delay: 0.15s; }
+        .flow-item:nth-child(3) { animation-delay: 0.2s; }
+        .flow-item:nth-child(4) { animation-delay: 0.25s; }
+        .flow-item:nth-child(5) { animation-delay: 0.3s; }
+        .flow-item:nth-child(6) { animation-delay: 0.35s; }
+        .flow-item:nth-child(7) { animation-delay: 0.4s; }
+        .flow-item:nth-child(8) { animation-delay: 0.45s; }
+        .flow-item:nth-child(9) { animation-delay: 0.5s; }
+        .flow-item:nth-child(10) { animation-delay: 0.55s; }
+        .flow-item:nth-child(11) { animation-delay: 0.6s; }
+        .flow-item:nth-child(12) { animation-delay: 0.65s; }
+        .flow-item:nth-child(13) { animation-delay: 0.7s; }
+        .flow-item:nth-child(14) { animation-delay: 0.75s; }
+        .flow-item:nth-child(15) { animation-delay: 0.8s; }
+        .flow-item:nth-child(16) { animation-delay: 0.85s; }
+
+        .step-box {
+            background: white;
+            border: 3px solid #FF6600;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(255, 102, 0, 0.15);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .step-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(255, 102, 0, 0.25);
+        }
+
+        .step-box.start {
+            background: linear-gradient(135deg, #FF6600, #FF8533);
+            color: white;
+            border: none;
+        }
+
+        .step-box.end {
+            background: linear-gradient(135deg, #4CAF50, #66BB6A);
+            color: white;
+            border: none;
+        }
+
+        .step-number {
+            background: #FF6600;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-right: 15px;
+            box-shadow: 0 3px 8px rgba(255, 102, 0, 0.3);
+        }
+
+        .step-box.start .step-number,
+        .step-box.end .step-number {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .step-content {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .step-text {
+            flex: 1;
+        }
+
+        .step-text h3 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            color: #FF6600;
+        }
+
+        .step-box.start .step-text h3,
+        .step-box.end .step-text h3 {
+            color: white;
+        }
+
+        .step-text p {
+            font-size: 1.05em;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .step-box.start .step-text p,
+        .step-box.end .step-text p {
+            color: white;
+        }
+
+        .actor-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #FFE0B2;
+            color: #FF6600;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-top: 10px;
+            box-shadow: 0 2px 5px rgba(255, 102, 0, 0.15);
+        }
+
+        .step-box.start .actor-label,
+        .step-box.end .actor-label {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+
+        /* Arrow */
+        .arrow {
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 20px solid #FF6600;
+            margin: 5px auto;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* Note Box */
+        .note-box {
+            background: #FFF8F0;
+            border-left: 5px solid #FF6600;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-style: italic;
+            font-size: 0.95em;
+            color: #666;
+        }
+
+        .note-box::before {
+            content: '⚠️ ';
+            font-style: normal;
+        }
+
+        .step-box.start .note-box,
+        .step-box.end .note-box {
+            background: rgba(255, 255, 255, 0.2);
+            border-left-color: white;
+            color: white;
+        }
+
+        /* Sub-steps */
+        .sub-steps {
+            margin-top: 15px;
+            padding-left: 20px;
+            border-left: 3px solid #FFE0B2;
+        }
+
+        .sub-step {
+            padding: 8px 0;
+            font-size: 0.95em;
+            color: #555;
+        }
+
+        .step-box.start .sub-step,
+        .step-box.end .sub-step {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .header p {
+                font-size: 1em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .info-section {
+                grid-template-columns: 1fr;
+            }
+
+            .legend {
+                padding: 15px 20px;
+                gap: 15px;
+            }
+
+            .tab-nav {
+                padding: 10px 20px;
+            }
+
+            .step-number {
+                width: 35px;
+                height: 35px;
+                font-size: 1em;
+            }
+
+            .step-text h3 {
+                font-size: 1.1em;
+            }
+
+            .step-text p {
+                font-size: 0.95em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>💰 SOP Pengelolaan Dana Kegiatan Kemahasiswaan</h1>
+            <p>Fakultas Ilmu Sosial dan Ilmu Politik - Universitas Tadulako</p>
+        </div>
+
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-box start"></div>
+                <span>Langkah Awal</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box process"></div>
+                <span>Proses</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box end"></div>
+                <span>Selesai</span>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="openTab(event, 'pengajuan')">📝 Pengajuan Proposal</button>
+            <button class="tab-btn" onclick="openTab(event, 'verifikasi')">✅ Verifikasi & Persetujuan</button>
+            <button class="tab-btn" onclick="openTab(event, 'pencairan')">💵 Pencairan Dana</button>
+            <button class="tab-btn" onclick="openTab(event, 'monitoring')">👁️ Monitoring</button>
+            <button class="tab-btn" onclick="openTab(event, 'lpj')">📊 LPJ & Evaluasi</button>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Info Section -->
+            <div class="info-section">
+                <div class="info-box">
+                    <h3>🎯 Jenis Kegiatan</h3>
+                    <ul>
+                        <li>Kegiatan organisasi (BEM, HIMA, UKM)</li>
+                        <li>Kegiatan akademik dan ilmiah</li>
+                        <li>Pengabdian dan bakti sosial</li>
+                        <li>Seni, budaya, dan olahraga</li>
+                        <li>Kepanitiaan fakultas</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h3>👥 Pelaksana</h3>
+                    <ul>
+                        <li>Wakil Dekan Bima</li>
+                        <li>Wakil Dekan Bikum</li>
+                        <li>Kabag & Pokja Keuangan</li>
+                        <li>Bagian Kemahasiswaan</li>
+                        <li>Staf Administrasi Keuangan</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-box">
+                    <h3>⏱️ Waktu Proses</h3>
+                    <div class="timeline-item">
+                        <strong>Verifikasi Proposal:</strong> Maksimal 7 hari kerja
+                    </div>
+                    <div class="timeline-item">
+                        <strong>Pencairan Dana:</strong> Maksimal 5 hari kerja
+                    </div>
+                    <div class="timeline-item">
+                        <strong>Pengajuan LPJ:</strong> Maksimal 14 hari setelah kegiatan
+                    </div>
+                    <div class="timeline-item">
+                        <strong>Pengajuan Proposal:</strong> Minimal 21 hari sebelum kegiatan
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 1: Pengajuan Proposal -->
+            <div id="pengajuan" class="tab-content active">
+                <div class="flowchart-container">
+                    <!-- Step 1 -->
+                    <div class="flow-item">
+                        <div class="step-box start">
+                            <div class="step-content">
+                                <div class="step-number">1</div>
+                                <div class="step-text">
+                                    <h3>Penyusunan Proposal dan RAB</h3>
+                                    <p>Organisasi kemahasiswaan/panitia menyusun proposal kegiatan lengkap dengan Rencana Anggaran Biaya (RAB) yang mencakup latar belakang, tujuan, sasaran, waktu pelaksanaan, susunan panitia, rundown acara, dan RAB detail</p>
+                                    <div class="actor-label">
+                                        <span>👥</span>
+                                        <span>Panitia/Organisasi Kemahasiswaan</span>
+                                    </div>
+                                    <div class="note-box">
+                                        Proposal harus ditandatangani oleh Ketua Pelaksana dan Dosen Pembina/Pendamping
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arrow"></div>
+
+                    <!-- Step 2 -->
+                    <div class="flow-item">
+                        <div class="step-box">
+                            <div class="step-content">
+                                <div class="step-number">2</div>
+                                <div class="step-text">
+                                    <h3>Pengajuan Proposal</h3>
+                                    <p>Mengajukan proposal ke Bagian Kemahasiswaan minimal 21 hari sebelum pelaksanaan kegiatan</p>
+                                    <div class="actor-label">
+                                        <span>👥</span>
+                                        <span>Panitia</span>
+                                    </div>
+                                    <div class="note-box">
+                                        Proposal harus diajukan minimal 21 hari sebelum pelaksanaan kegiatan
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arrow"></div>
+
+                    <!-- Step 3 -->
+                    <div class="flow-item">
+                        <div class="step-box end">
+                            <div class="step-content">
+                                <div class="step-number">3</div>
+                                <div class="step-text">
+                                    <h3>Pendaftaran Proposal</h3>
+                                    <p>Bagian Kemahasiswaan menerima dan mendaftarkan proposal yang masuk untuk proses verifikasi selanjutnya</p>
+                                    <div class="actor-label">
+                                        <span>📋</span>
+                                        <span>Bagian Kemahasiswaan</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 2: Verifikasi & Persetujuan -->
+            <div id="verifikasi" class="tab-content">
+                <div class="flowchart-container">
+                    <!-- Step 1 -->
+                    <div class="flow-item">
+                        <div class="step-box start">
+                            <div class="step-content">
+                                <div class="step-number">1</div>
+                                <div class="step-text">
+                                    <h3>Verifikasi Kelengkapan Dokumen</h3>
+                                    <p>Bagian Kemahasiswaan melakukan verifikasi kelengkapan dokumen proposal dan kesesuaian dengan program kerja kemahasiswaan</p>
+                                    <div class="actor-label">
+                                        <span>📋</span>
+                                        <span>Bagian Kemahasiswaan</span>
+                                    </div>
+                                    <div class="note-box">
+                                        Waktu verifikasi maksimal 7 hari kerja
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arrow"></div>
+
+                    <!-- Step 2 -->
+                    <div class="flow-item">
+                        <div class="step-box">
+                            <div class="step-content">
+                                <div class="step-number">2</div>
+                                <div class="step-text">
+                                    <h3>Penelaahan Substansi Kegiatan</h3>
+                                    <p>Proposal disampaikan kepada Wakil Dekan Bima untuk penelaahan substansi kegiatan dan memberikan rekomendasi persetujuan atau revisi</p>
+                                    <div class="actor-label">
+                                        <span>👔</span>
+                                        <span>Wakil Dekan Bima</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arrow"></div>
+
+                    <!-- Step 3 -->
+                    <div class="flow-item">
+                        <div class="step-box">
+                            <div class="step-content">
+                                <div class="step-number">3</div>
+                                <div class="step-text">
+                                    <h3>Verifikasi Anggaran</h3>
+                                    <p>Proposal yang disetujui diteruskan ke Wakil Dekan Bikum untuk verifikasi anggaran dan menilai kewajaran serta kesesuaian RAB dengan ketentuan</p>
+                                    <div class="actor-label">
+                                        <span>💼</span>
+                                        <span>Wakil Dekan Bikum & Kabag</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arrow"></div>
+
+                    <!-- Step 4 -->
+                    <div class="flow-item">
+                        <div class="step-box">
+                            <div class="step-content">
+                                <div class="step-number">4</div>
+                                <div class="step-text">
+                                    <h3>Revisi RAB (Jika Diperlukan)</h3>
+                                    <p>Jika RAB perlu penyesuaian, panitia diminta untuk merevisi sesuai dengan catatan yang diberikan</p>
+                                    <div class="actor-label">
+                                        <span>👥</span>
+                                        <span>Panitia</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arrow"></div>
+
+                    <!-- Step 5 -->
+                    <div class="flow-item">
+                        <div class="step-box end">
+                            <div class="step-content">
+                                <div class="step-number">5</div>
+                                <div class="step-text">
+                                    <h3>Pengesahan Proposal</h3>
+                                    <p>Proposal yang telah disetujui secara substansi dan anggaran disampaikan kepada Dekan untuk pengesahan</p>
+                                    <div class="actor-label">
+                                        <span>🎓</span>
+                                        <span>Dekan</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 3: Pencairan Dana -->
+            <div id="pencairan" class="tab-content">
+                <div class="flowchart-container">
+                    <!-- Step 1 -->
+                    <div class="flow-item">
+                        <div class="step-box start">
+                            <div class="step-content">
+                                <div class="step-number">1</div>
+                                <div class="step-text">
+                                    <h3>Permohonan Pencairan Dana</h3>
+                                    <p>Panitia mengajukan surat permohonan pencairan dana setelah proposal disahkan dengan melampirkan proposal yang telah disahkan, RAB, dan rekening panitia/organisasi</p>
+                                    <div class="actor-label">
+                                        <span>👥</span>
+                                        <span>Panitia</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arrow"></div>
+
+                    <!-- Step 2 -->
+                    <div class="flow-item">
+                        <div class="step-box">
+                            <div class="step-content">
+                                <div class="step-number">2</div>
+                                <div class="step-text">
+                                    <h3>Verifikasi Dokumen Pencairan</h3>
+                                    <p>Pokja Keuangan memverifikasi kelengkapan dokumen pencairan dan membuat Surat Perintah Pencairan Dana (SPPD) yang ditandatangani Kabag dan Wakil Dekan Bikum</p>
+                                    <div class="actor-label">
+                                        <span>💰</span>
+                                        <span>Pokja Keuangan</span>
+                                    </div>
+                                    <div class="note-box">
+                                        Waktu pencairan dana maksimal 5 hari kerja setelah proposal disetujui
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arrow"></div>
+
+                    <!-- Step 3 -->
+                    <div class="flow-item">
+                        <div class="step-box">
+                            <div class="step-content">
+                                <div class="step-number">3</div>
+                                <div class="step-text">
+                                    <h3>Proses Transfer Dana</h3>
+                                    <p>Staf Keuangan memproses transfer dana ke rekening panitia/organisasi sesuai dengan SPPD yang telah ditandatangani</p>
+                                    <div class="actor-label">
+                                        <span>💳</span>
+                                        <span>Staf Keuangan</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arrow"></div>
+
+                    <!-- Step 4 -->
+                    <div class="flow-item">
+                        <div class="step-box end">
+                            <div class="step-content">
+                                <div class="step-number">4</div>
+                                <div class="step-text">
+                                    <h3>Penerimaan Dana dan Dokumentasi</h3>
+                                    <p>Panitia menandatangani kwitansi penerimaan dana, membuat bukti pencairan dan mengarsipkan dokumen</p>
+                                    <div class="actor-label">
+                                        <span>👥📄</span>
+                                        <span>Panitia & Staf Keuangan</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 4: Monitoring -->
+            <div id="monitoring" class="tab-content">
+                <div class="flowchart-container">
+                    <!-- Step 1 -->
+                    <div class="flow-item">
+                        <div class="step-box start">
+                            <div class="step-content">
+                                <div class="step-number">1</div>
+                                <div class="step-text">
+                                    <h3>Monitoring Persiapan Kegiatan</h3>
+                                    <p>Bagian Kemahasiswaan melakukan monitoring persiapan kegiatan sebelum pelaksanaan untuk memastikan kesiapan panitia</p>
+                                    <div class="actor-label">
+                                        <span>📋</span>
+                                        <span>Bagian Kemahasiswaan</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arrow"></div>
+
+                    <!-- Step 2 -->
+                    <div class="flow-item">
+                        <div class="step-box">
+                            <div class="step-content">
+                                <div class="step-number">2</div>
+                                <div class="step-text">
+                                    <h3>Pelaksanaan Kegiatan</h3>
+                                    <p>Panitia melaksanakan kegiatan sesuai dengan proposal yang telah disetujui</p>
+                                    <div class="actor-label">
+                                        <span>🎯</span>
+                                        <span>Panitia</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arrow"></div>
+
+                    <!-- Step 3 -->
+                    <div class="flow-item">
+                        <div class="step-box">
+                            <div class="step-content">
+                                <div class="step-number">3</div>
+                                <div class="step-text">
+                                    <h3>Pemantauan Pelaksanaan</h3>
+                                    <p>Wakil Dekan Bima atau perwakilan menghadiri dan memantau pelaksanaan kegiatan serta memberikan catatan atau masukan selama kegiatan berlangsung</p>
+                                    <div class="actor-label">
+                                        <span>👁️</span>
+                                        <span>Wakil Dekan Bima</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arrow"></div>
+
+                    <!-- Step 4 -->
+                    <div class="flow-item">
+                        <div class="step-box end">
+                            <div class="step-content">
+                                <div class="step-number">4</div>
+                                <div class="step-text">
+                                    <h3>Dokumentasi Kegiatan</h3>
+                                    <p>Bagian Kemahasiswaan mendokumentasikan pelaksanaan kegiatan untuk keperluan evaluasi dan pelaporan</p>
+                                    <div class="actor-label">
+                                        <span>📸</span>
+                                        <span>Bagian Kemahasiswaan</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 5: LPJ & Evaluasi -->
+            <div id="lpj" class="tab-content">
+                <div class="flowchart-container">
+                    <!-- Step 1 -->
+                    <div class="flow-item">
+                        <div class="step-box start">
+                            <div class="step-content">
+                                <div class="step-number">1</div>
+                                <div class="step-text">
+                                    <h3>Penyusunan LPJ Keuangan</h3>
+                                    <p>Panitia menyusun Laporan Pertanggungjawaban (LPJ) keuangan maksimal 14 hari setelah kegiatan selesai, mencakup laporan penggunaan dana, bukti pengeluaran, dokumentasi kegiatan, dan sisa dana</p>
+                                    <div class="actor-label">
+                                        <span>👥</span>
+                                        <span>Panitia</span>
+                                    </div>
+                                    <div class="note-box">
+                                        LPJ harus diajukan maksimal 14 hari setelah kegiatan selesai
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arrow"></div>
+
+                    <!-- Step 2 -->
+                    <div class="flow-item">
+                        <div class="step-box">
+                            <div class="step-content">
+                                <div class="step-number">2</div>
+                                <div class="step-text">
+                                    <h3>Pengajuan LPJ</h3>
+                                    <p>Mengajukan LPJ ke Bagian Kemahasiswaan dengan tembusan Pokja Keuangan untuk proses verifikasi</p>
+                                    <div class="actor-label">
+                                        <span>👥</span>
+                                        <span>Panitia</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arrow"></div>
+
+                    <!-- Step 3 -->
+                    <div class="flow-item">
+                        <div class="step-box">
+                            <div class="step-content">
+                                <div class="step-number">3</div>
+                                <div class="step-text">
+                                    <h3>Verifikasi LPJ</h3>
+                                    <p>Pokja Keuangan melakukan verifikasi kesesuaian penggunaan dana dengan RAB dan memeriksa kelengkapan serta keabsahan bukti pengeluaran</p>
+                                    <div class="sub-steps">
+                                        <div class="sub-step">✓ Verifikasi kesesuaian dengan RAB</div>
+                                        <div class="sub-step">✓ Pemeriksaan bukti pengeluaran</div>
+                                        <div class="sub-step">✓ Kelengkapan dokumen</div>
+                                    </div>
+                                    <div class="actor-label">
+                                        <span>💰</span>
+                                        <span>Pokja Keuangan</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arrow"></div>
+
+                    <!-- Step 4 -->
+                    <div class="flow-item">
+                        <div class="step-box">
+                            <div class="step-content">
+                                <div class="step-number">4</div>
+                                <div class="step-text">
+                                    <h3>Perbaikan LPJ (Jika Diperlukan)</h3>
+                                    <p>Jika terdapat kekurangan, panitia diminta melengkapi dalam waktu 3 hari kerja</p>
+                                    <div class="actor-label">
+                                        <span>👥</span>
+                                        <span>Panitia</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arrow"></div>
+
+                    <!-- Step 5 -->
+                    <div class="flow-item">
+                        <div class="step-box">
+                            <div class="step-content">
+                                <div class="step-number">5</div>
+                                <div class="step-text">
+                                    <h3>Persetujuan dan Pengesahan LPJ</h3>
+                                    <p>LPJ yang telah diverifikasi disampaikan ke Kabag untuk persetujuan, kemudian Kabag menyampaikan ke Wakil Dekan Bikum untuk pengesahan</p>
+                                    <div class="actor-label">
+                                        <span>💼</span>
+                                        <span>Kabag & Wakil Dekan Bikum</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arrow"></div>
+
+                    <!-- Step 6 -->
+                    <div class="flow-item">
+                        <div class="step-box">
+                            <div class="step-content">
+                                <div class="step-number">6</div>
+                                <div class="step-text">
+                                    <h3>Pengembalian Sisa Dana (Jika Ada)</h3>
+                                    <p>Jika terdapat sisa dana, panitia mengembalikan ke kas fakultas dalam waktu 3 hari kerja setelah pengesahan LPJ</p>
+                                    <div class="actor-label">
+                                        <span>💵</span>
+                                        <span>Panitia</span>
+                                    </div>
+                                    <div class="note-box">
+                                        Sisa dana harus dikembalikan maksimal 3 hari kerja setelah pengesahan LPJ
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arrow"></div>
+
+                    <!-- Step 7 -->
+                    <div class="flow-item">
+                        <div class="step-box">
+                            <div class="step-content">
+                                <div class="step-number">7</div>
+                                <div class="step-text">
+                                    <h3>Evaluasi Kegiatan</h3>
+                                    <p>Panitia menyusun laporan kegiatan lengkap (naratif dan keuangan), kemudian Bagian Kemahasiswaan melakukan evaluasi hasil kegiatan</p>
+                                    <div class="actor-label">
+                                        <span>📋</span>
+                                        <span>Panitia & Bagian Kemahasiswaan</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arrow"></div>
+
+                    <!-- Step 8 -->
+                    <div class="flow-item">
+                        <div class="step-box end">
+                            <div class="step-content">
+                                <div class="step-number">8</div>
+                                <div class="step-text">
+                                    <h3>Pelaporan dan Pengarsipan</h3>
+                                    <p>Bagian Kemahasiswaan menyusun rekapitulasi penggunaan dana kegiatan per semester, melaporkan kepada Wakil Dekan Bima dan Dekan, serta mengarsipkan seluruh dokumen kegiatan</p>
+                                    <div class="actor-label">
+                                        <span>📊</span>
+                                        <span>Bagian Kemahasiswaan</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Info -->
+            <div style="margin-top: 50px; padding: 30px; background: #FFF3E6; border-radius: 15px; border-left: 5px solid #FF6600;">
+                <h3 style="color: #FF6600; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                    <span>📚</span>
+                    <span>Referensi</span>
+                </h3>
+                <ul style="list-style: none; padding: 0; line-height: 1.8;">
+                    <li style="padding: 5px 0;">✓ Peraturan Menteri Riset, Teknologi, dan Pendidikan Tinggi tentang Statuta Universitas Tadulako</li>
+                    <li style="padding: 5px 0;">✓ Pedoman dan Peraturan Akademik Universitas Tadulako 2024-2025</li>
+                    <li style="padding: 5px 0;">✓ Panduan Akademik FISIP Universitas Tadulako 2024-2025</li>
+                    <li style="padding: 5px 0;">✓ Peraturan Rektor tentang Pengelolaan Keuangan Universitas Tadulako</li>
+                    <li style="padding: 5px 0;">✓ Pedoman Organisasi Kemahasiswaan FISIP Universitas Tadulako</li>
+                </ul>
+                <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #FFE0B2; text-align: center; color: #666;">
+                    <p><strong>Tanggal Pembuatan:</strong> 28 November 2025 | <strong>Revisi:</strong> Rev. 0</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openTab(event, tabName) {
+            // Hide all tab contents
+            const tabContents = document.getElementsByClassName('tab-content');
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove('active');
+            }
+
+            // Remove active class from all buttons
+            const tabBtns = document.getElementsByClassName('tab-btn');
+            for (let i = 0; i < tabBtns.length; i++) {
+                tabBtns[i].classList.remove('active');
+            }
+
+            // Show selected tab and mark button as active
+            document.getElementById(tabName).classList.add('active');
+            event.currentTarget.classList.add('active');
+
+            // Reset animations for flow items in the newly opened tab
+            const flowItems = document.getElementById(tabName).querySelectorAll('.flow-item');
+            flowItems.forEach((item, index) => {
+                item.style.animation = 'none';
+                setTimeout(() => {
+                    item.style.animation = '';
+                }, 10);
+            });
+        }
+
+        // Add smooth scroll behavior and animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate elements on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateX(0)';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.flow-item').forEach(item => {
+                observer.observe(item);
+            });
+        });
+    </script>
+</body>
+</html>

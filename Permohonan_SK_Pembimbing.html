@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOP Permohonan SK Pembimbing Skripsi FISIP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FFF8F0 0%, #FFE0B2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(255, 102, 0, 0.15);
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #FF6600 0%, #FF8533 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 15s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            position: relative;
+            z-index: 1;
+            opacity: 0.95;
+        }
+
+        /* Legend */
+        .legend {
+            background: #FFF3E6;
+            padding: 20px 40px;
+            border-bottom: 3px solid #FFE0B2;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95em;
+        }
+
+        .legend-box {
+            width: 40px;
+            height: 30px;
+            border-radius: 8px;
+            border: 2px solid #FF6600;
+        }
+
+        .legend-box.start {
+            background: linear-gradient(135deg, #FF6600, #FF8533);
+        }
+
+        .legend-box.process {
+            background: white;
+        }
+
+        .legend-box.end {
+            background: linear-gradient(135deg, #4CAF50, #66BB6A);
+        }
+
+        /* Content */
+        .content {
+            padding: 40px;
+        }
+
+        /* Warning Box */
+        .warning-box {
+            background: linear-gradient(135deg, #FFE0B2 0%, #FFCC80 100%);
+            border: 2px solid #FF6600;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(255, 102, 0, 0.15);
+        }
+
+        .warning-box h3 {
+            color: #FF6600;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .warning-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .warning-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #FF6600;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        /* Info Boxes */
+        .info-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .info-box {
+            background: #FFF3E6;
+            border-left: 5px solid #FF6600;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(255, 102, 0, 0.1);
+        }
+
+        .info-box h3 {
+            color: #FF6600;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-box li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            font-size: 1.05em;
+            line-height: 1.6;
+        }
+
+        .info-box li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #FF6600;
+            font-weight: bold;
+        }
+
+        .timeline-box {
+            background: #FFF3E6;
+            border: 2px solid #FFE0B2;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(255, 102, 0, 0.1);
+        }
+
+        .timeline-box .time-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .timeline-box h3 {
+            color: #FF6600;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .timeline-box p {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Flowchart */
+        .flowchart-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        .flow-item {
+            width: 100%;
+            max-width: 700px;
+            position: relative;
+            animation: slideIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .flow-item:nth-child(1) { animation-delay: 0.1s; }
+        .flow-item:nth-child(2) { animation-delay: 0.15s; }
+        .flow-item:nth-child(3) { animation-delay: 0.2s; }
+        .flow-item:nth-child(4) { animation-delay: 0.25s; }
+        .flow-item:nth-child(5) { animation-delay: 0.3s; }
+        .flow-item:nth-child(6) { animation-delay: 0.35s; }
+        .flow-item:nth-child(7) { animation-delay: 0.4s; }
+        .flow-item:nth-child(8) { animation-delay: 0.45s; }
+        .flow-item:nth-child(9) { animation-delay: 0.5s; }
+        .flow-item:nth-child(10) { animation-delay: 0.55s; }
+        .flow-item:nth-child(11) { animation-delay: 0.6s; }
+        .flow-item:nth-child(12) { animation-delay: 0.65s; }
+        .flow-item:nth-child(13) { animation-delay: 0.7s; }
+        .flow-item:nth-child(14) { animation-delay: 0.75s; }
+        .flow-item:nth-child(15) { animation-delay: 0.8s; }
+        .flow-item:nth-child(16) { animation-delay: 0.85s; }
+
+        .step-box {
+            background: white;
+            border: 3px solid #FF6600;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(255, 102, 0, 0.15);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .step-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(255, 102, 0, 0.25);
+        }
+
+        .step-box.start {
+            background: linear-gradient(135deg, #FF6600, #FF8533);
+            color: white;
+            border: none;
+        }
+
+        .step-box.end {
+            background: linear-gradient(135deg, #4CAF50, #66BB6A);
+            color: white;
+            border: none;
+        }
+
+        .step-number {
+            background: #FF6600;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-right: 15px;
+            box-shadow: 0 3px 8px rgba(255, 102, 0, 0.3);
+        }
+
+        .step-box.start .step-number,
+        .step-box.end .step-number {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .step-content {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .step-text {
+            flex: 1;
+        }
+
+        .step-text h3 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            color: #FF6600;
+        }
+
+        .step-box.start .step-text h3,
+        .step-box.end .step-text h3 {
+            color: white;
+        }
+
+        .step-text p {
+            font-size: 1.05em;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .step-box.start .step-text p,
+        .step-box.end .step-text p {
+            color: white;
+        }
+
+        .actor-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #FFE0B2;
+            color: #FF6600;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-top: 10px;
+            box-shadow: 0 2px 5px rgba(255, 102, 0, 0.15);
+        }
+
+        .step-box.start .actor-label,
+        .step-box.end .actor-label {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+
+        /* Arrow */
+        .arrow {
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 20px solid #FF6600;
+            margin: 5px auto;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* Note Box */
+        .note-box {
+            background: #FFF8F0;
+            border-left: 5px solid #FF6600;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-style: italic;
+            font-size: 0.95em;
+            color: #666;
+        }
+
+        .note-box::before {
+            content: '⚠️ ';
+            font-style: normal;
+        }
+
+        .step-box.start .note-box,
+        .step-box.end .note-box {
+            background: rgba(255, 255, 255, 0.2);
+            border-left-color: white;
+            color: white;
+        }
+
+        /* Sub-steps */
+        .sub-steps {
+            margin-top: 15px;
+            padding-left: 20px;
+            border-left: 3px solid #FFE0B2;
+        }
+
+        .sub-step {
+            padding: 8px 0;
+            font-size: 0.95em;
+            color: #555;
+        }
+
+        .step-box.start .sub-step,
+        .step-box.end .sub-step {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .header p {
+                font-size: 1em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .info-section {
+                grid-template-columns: 1fr;
+            }
+
+            .warning-items {
+                grid-template-columns: 1fr;
+            }
+
+            .legend {
+                padding: 15px 20px;
+                gap: 15px;
+            }
+
+            .step-number {
+                width: 35px;
+                height: 35px;
+                font-size: 1em;
+            }
+
+            .step-text h3 {
+                font-size: 1.1em;
+            }
+
+            .step-text p {
+                font-size: 0.95em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>📝 SOP Permohonan SK Pembimbing Skripsi</h1>
+            <p>Fakultas Ilmu Sosial dan Ilmu Politik - Universitas Tadulako</p>
+        </div>
+
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-box start"></div>
+                <span>Langkah Awal</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box process"></div>
+                <span>Proses</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box end"></div>
+                <span>Selesai</span>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Warning Box -->
+            <div class="warning-box">
+                <h3>⚠️ CATATAN PENTING - WAJIB DIBACA</h3>
+                <div class="warning-items">
+                    <div class="warning-item">
+                        <strong>📋 Syarat Wajib:</strong> SK Pembimbing harus diperoleh sebelum mahasiswa memulai proses bimbingan proposal dan skripsi
+                    </div>
+                    <div class="warning-item">
+                        <strong>👨‍🏫 Pembimbing:</strong> Dosen tetap Fakultas FISIP dengan kualifikasi sesuai bidang keahlian (minimal Asisten Ahli)
+                    </div>
+                    <div class="warning-item">
+                        <strong>📚 Kesesuaian Judul:</strong> Judul yang diajukan harus sesuai dengan konsentrasi/bidang kajian yang ada di Program Studi
+                    </div>
+                    <div class="warning-item">
+                        <strong>⏰ Masa Berlaku:</strong> SK Pembimbing berlaku untuk satu semester dan dapat diperpanjang jika diperlukan
+                    </div>
+                    <div class="warning-item">
+                        <strong>📝 Waktu Proposal:</strong> Waktu penyusunan proposal: 3 bulan (dapat diperpanjang 1 kali 3 bulan)
+                    </div>
+                    <div class="warning-item">
+                        <strong>📖 Waktu Skripsi:</strong> Waktu penyusunan skripsi: 6 bulan (dapat diperpanjang hingga 12 bulan)
+                    </div>
+                    <div class="warning-item">
+                        <strong>📓 Kartu Bimbingan:</strong> Mahasiswa wajib membawa kartu bimbingan setiap kali berkonsultasi dengan pembimbing
+                    </div>
+                    <div class="warning-item">
+                        <strong>🔄 Perubahan:</strong> Perubahan judul atau pembimbing harus diajukan kembali ke Jurusan/Program Studi
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Section -->
+            <div class="info-section">
+                <div class="info-box">
+                    <h3>📄 Persyaratan Dokumen</h3>
+                    <ul>
+                        <li>Formulir permohonan SK Pembimbing</li>
+                        <li>Transkrip nilai (minimal 110 SKS)</li>
+                        <li>KRS semester berjalan (memuat Skripsi)</li>
+                        <li>Outline/kerangka proposal penelitian</li>
+                        <li>Fotocopy KTM</li>
+                        <li>Bukti pembayaran UKT</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h3>🎓 Syarat Akademik</h3>
+                    <ul>
+                        <li>Minimal 110 SKS telah diselesaikan</li>
+                        <li>IPK minimal 2,75</li>
+                        <li>Status mahasiswa aktif</li>
+                        <li>Memprogram mata kuliah Skripsi</li>
+                        <li>Tidak sedang cuti akademik</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-box">
+                    <div class="time-icon">⏱️</div>
+                    <h3>Waktu Pelayanan</h3>
+                    <p>Maksimal 2 Hari Kerja</p>
+                    <small style="color: #666; margin-top: 5px; display: block;">sejak permohonan diajukan dengan dokumen lengkap</small>
+                </div>
+            </div>
+
+            <!-- Flowchart -->
+            <div class="flowchart-container">
+                <!-- Step 1 -->
+                <div class="flow-item">
+                    <div class="step-box start">
+                        <div class="step-content">
+                            <div class="step-number">1</div>
+                            <div class="step-text">
+                                <h3>Pengisian Formulir dan Pengajuan Judul</h3>
+                                <p>Mahasiswa mengakses SIAKAD atau website Fakultas FISIP untuk mengisi formulir permohonan SK Pembimbing dan mengajukan judul skripsi/proposal penelitian dalam formulir</p>
+                                <div class="actor-label">
+                                    <span>👤</span>
+                                    <span>Mahasiswa</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 2 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">2</div>
+                            <div class="step-text">
+                                <h3>Melampirkan Dokumen Persyaratan</h3>
+                                <p>Mahasiswa melampirkan seluruh dokumen persyaratan yang telah disiapkan</p>
+                                <div class="sub-steps">
+                                    <div class="sub-step">• Transkrip nilai (≥110 SKS, IPK ≥2,75)</div>
+                                    <div class="sub-step">• KRS semester berjalan (memuat mata kuliah Skripsi)</div>
+                                    <div class="sub-step">• Outline/kerangka proposal penelitian</div>
+                                    <div class="sub-step">• Fotocopy KTM</div>
+                                    <div class="sub-step">• Bukti pembayaran UKT semester berjalan</div>
+                                </div>
+                                <div class="actor-label">
+                                    <span>👤</span>
+                                    <span>Mahasiswa</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 3 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">3</div>
+                            <div class="step-text">
+                                <h3>Verifikasi Persyaratan Akademik</h3>
+                                <p>Ketua Jurusan/Koordinator Program Studi menerima permohonan dari mahasiswa dan melakukan verifikasi</p>
+                                <div class="sub-steps">
+                                    <div class="sub-step">✓ Memeriksa kelengkapan persyaratan akademik (SKS dan IPK)</div>
+                                    <div class="sub-step">✓ Meneliti kesesuaian judul dengan konsentrasi/bidang kajian</div>
+                                    <div class="sub-step">✓ Mengevaluasi outline/kerangka proposal penelitian</div>
+                                </div>
+                                <div class="actor-label">
+                                    <span>👔</span>
+                                    <span>Ketua Jurusan/Koordinator Prodi</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 4 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">4</div>
+                            <div class="step-text">
+                                <h3>Penetapan Dosen Pembimbing</h3>
+                                <p>Ketua Jurusan/Koordinator Program Studi menentukan dosen pembimbing dan mengisi formulir dengan nama dosen pembimbing</p>
+                                <div class="sub-steps">
+                                    <div class="sub-step">✓ Memilih dosen yang sesuai dengan bidang keahlian dan topik penelitian</div>
+                                    <div class="sub-step">✓ Dosen pembimbing adalah dosen tetap Fakultas FISIP</div>
+                                    <div class="sub-step">✓ Dosen pembimbing minimal memiliki jabatan akademik Asisten Ahli</div>
+                                </div>
+                                <div class="actor-label">
+                                    <span>👔</span>
+                                    <span>Ketua Jurusan/Koordinator Prodi</span>
+                                </div>
+                                <div class="note-box">
+                                    Dosen pembimbing dipilih berdasarkan kesesuaian bidang keahlian dengan topik penelitian mahasiswa
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 5 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">5</div>
+                            <div class="step-text">
+                                <h3>Verifikasi Administrasi POKJA</h3>
+                                <p>POKJA/Staf Sub Bagian Akademik menerima formulir dari Jurusan/Program Studi dan melakukan verifikasi administrasi</p>
+                                <div class="sub-steps">
+                                    <div class="sub-step">✓ Memeriksa kelengkapan dokumen persyaratan</div>
+                                    <div class="sub-step">✓ Memverifikasi data mahasiswa di sistem</div>
+                                    <div class="sub-step">✓ Memeriksa status keaktifan mahasiswa</div>
+                                    <div class="sub-step">✓ Memverifikasi kesesuaian dosen pembimbing dengan beban kerja dosen</div>
+                                    <div class="sub-step">✓ Memberikan paraf setelah verifikasi</div>
+                                </div>
+                                <div class="actor-label">
+                                    <span>📋</span>
+                                    <span>POKJA/Staf Sub Bagian Akademik</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 6 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">6</div>
+                            <div class="step-text">
+                                <h3>Persetujuan KABAG</h3>
+                                <p>KABAG menerima formulir yang telah diverifikasi oleh POKJA, memeriksa kelengkapan proses verifikasi, dan memberikan persetujuan serta paraf pada formulir</p>
+                                <div class="actor-label">
+                                    <span>💼</span>
+                                    <span>KABAG FISIP</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 7 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">7</div>
+                            <div class="step-text">
+                                <h3>Penerbitan dan Penandatanganan SK Pembimbing</h3>
+                                <p>Sub Bagian Akademik memproses pembuatan SK Pembimbing yang ditandatangani oleh Dekan Fakultas FISIP. SK memuat nomor SK, tanggal penetapan, nama mahasiswa, judul skripsi, nama dosen pembimbing, masa berlaku, dan dilengkapi barcode untuk verifikasi keaslian</p>
+                                <div class="actor-label">
+                                    <span>🎓</span>
+                                    <span>Sub Bagian Akademik & Dekan</span>
+                                </div>
+                                <div class="note-box">
+                                    SK Pembimbing berlaku untuk satu semester dan dapat diperpanjang jika diperlukan
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 8 -->
+                <div class="flow-item">
+                    <div class="step-box end">
+                        <div class="step-content">
+                            <div class="step-number">8</div>
+                            <div class="step-text">
+                                <h3>Pencetakan dan Distribusi SK</h3>
+                                <p>Mahasiswa mencetak SK Pembimbing berbarcode melalui sistem. SK didistribusikan kepada mahasiswa (1 eksemplar), dosen pembimbing (1 eksemplar), Ketua Jurusan (arsip), dan Sub Bagian Akademik (arsip). Mahasiswa memulai proses bimbingan dengan membawa kartu bimbingan</p>
+                                <div class="actor-label">
+                                    <span>👤📄</span>
+                                    <span>Mahasiswa & Sub Bagian Akademik</span>
+                                </div>
+                                <div class="note-box">
+                                    Mahasiswa wajib membawa kartu bimbingan setiap kali berkonsultasi dengan pembimbing
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Info -->
+            <div style="margin-top: 50px; padding: 30px; background: linear-gradient(135deg, #FFE0B2 0%, #FFCC80 100%); border-radius: 15px; border: 2px solid #FF6600;">
+                <h3 style="color: #FF6600; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-size: 1.4em;">
+                    <span>⏰</span>
+                    <span>Waktu Penyusunan dan Perpanjangan</span>
+                </h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
+                    <div style="background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #FF6600;">
+                        <strong style="color: #FF6600; font-size: 1.1em;">📝 Penyusunan Proposal:</strong><br><br>
+                        <span style="font-size: 1.3em; font-weight: bold; color: #333;">3 Bulan</span><br>
+                        <small style="color: #666;">(dapat diperpanjang 1 kali 3 bulan)</small>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #FF6600;">
+                        <strong style="color: #FF6600; font-size: 1.1em;">📖 Penyusunan Skripsi:</strong><br><br>
+                        <span style="font-size: 1.3em; font-weight: bold; color: #333;">6 Bulan</span><br>
+                        <small style="color: #666;">(dapat diperpanjang hingga 12 bulan)</small>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #FF6600;">
+                        <strong style="color: #FF6600; font-size: 1.1em;">🔄 Perpanjangan SK:</strong><br><br>
+                        <span style="font-size: 1.1em; color: #333;">SK yang sudah tidak berlaku harus diajukan pembaruan/perpanjangan</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Info -->
+            <div style="margin-top: 30px; padding: 30px; background: #FFF3E6; border-radius: 15px; border-left: 5px solid #FF6600;">
+                <h3 style="color: #FF6600; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                    <span>📚</span>
+                    <span>Referensi</span>
+                </h3>
+                <ul style="list-style: none; padding: 0; line-height: 1.8;">
+                    <li style="padding: 5px 0;">✓ Pedoman dan Peraturan Akademik Universitas Tadulako Tahun 2024-2025</li>
+                    <li style="padding: 5px 0;">✓ Panduan Akademik FISIP Universitas Tadulako Tahun 2024-2025</li>
+                    <li style="padding: 5px 0;">✓ Pedoman Penulisan Skripsi FISIP Universitas Tadulako</li>
+                    <li style="padding: 5px 0;">✓ Peraturan tentang Pembimbingan Tugas Akhir Mahasiswa</li>
+                    <li style="padding: 5px 0;">✓ SK Dekan tentang Beban Kerja Dosen</li>
+                </ul>
+                <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #FFE0B2;">
+                    <p style="text-align: center; color: #666; margin-bottom: 10px;"><strong>Tanggal Pembuatan:</strong> 28 November 2025 | <strong>Revisi:</strong> Rev. 0</p>
+                    <p style="text-align: center; color: #666; font-size: 0.95em;">
+                        📞 Untuk pertanyaan atau kendala, hubungi Sub Bagian Akademik FISIP atau Jurusan/Program Studi
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add smooth scroll behavior and animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate elements on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateX(0)';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.flow-item').forEach(item => {
+                observer.observe(item);
+            });
+        });
+    </script>
+</body>
+</html>

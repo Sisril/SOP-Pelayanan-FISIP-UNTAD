@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOP Ujian Tengah Semester (UTS) FISIP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FFF8F0 0%, #FFE0B2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(255, 102, 0, 0.15);
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #FF6600 0%, #FF8533 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 15s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            position: relative;
+            z-index: 1;
+            opacity: 0.95;
+        }
+
+        /* Legend */
+        .legend {
+            background: #FFF3E6;
+            padding: 20px 40px;
+            border-bottom: 3px solid #FFE0B2;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95em;
+        }
+
+        .legend-box {
+            width: 40px;
+            height: 30px;
+            border-radius: 8px;
+            border: 2px solid #FF6600;
+        }
+
+        .legend-box.start {
+            background: linear-gradient(135deg, #FF6600, #FF8533);
+        }
+
+        .legend-box.process {
+            background: white;
+        }
+
+        .legend-box.end {
+            background: linear-gradient(135deg, #4CAF50, #66BB6A);
+        }
+
+        /* Content */
+        .content {
+            padding: 40px;
+        }
+
+        /* Warning Box */
+        .warning-box {
+            background: linear-gradient(135deg, #FFE0B2 0%, #FFCC80 100%);
+            border: 2px solid #FF6600;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(255, 102, 0, 0.15);
+        }
+
+        .warning-box h3 {
+            color: #FF6600;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .warning-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .warning-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #FF6600;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        /* Info Boxes */
+        .info-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .info-box {
+            background: #FFF3E6;
+            border-left: 5px solid #FF6600;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(255, 102, 0, 0.1);
+        }
+
+        .info-box h3 {
+            color: #FF6600;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-box li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            font-size: 1.05em;
+            line-height: 1.6;
+        }
+
+        .info-box li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #FF6600;
+            font-weight: bold;
+        }
+
+        .timeline-box {
+            background: #FFF3E6;
+            border: 2px solid #FFE0B2;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(255, 102, 0, 0.1);
+        }
+
+        .timeline-box .time-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .timeline-box h3 {
+            color: #FF6600;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .timeline-box p {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Flowchart */
+        .flowchart-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        .flow-item {
+            width: 100%;
+            max-width: 700px;
+            position: relative;
+            animation: slideIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .flow-item:nth-child(1) { animation-delay: 0.05s; }
+        .flow-item:nth-child(2) { animation-delay: 0.1s; }
+        .flow-item:nth-child(3) { animation-delay: 0.15s; }
+        .flow-item:nth-child(4) { animation-delay: 0.2s; }
+        .flow-item:nth-child(5) { animation-delay: 0.25s; }
+        .flow-item:nth-child(6) { animation-delay: 0.3s; }
+        .flow-item:nth-child(7) { animation-delay: 0.35s; }
+        .flow-item:nth-child(8) { animation-delay: 0.4s; }
+        .flow-item:nth-child(9) { animation-delay: 0.45s; }
+        .flow-item:nth-child(10) { animation-delay: 0.5s; }
+        .flow-item:nth-child(11) { animation-delay: 0.55s; }
+        .flow-item:nth-child(12) { animation-delay: 0.6s; }
+        .flow-item:nth-child(13) { animation-delay: 0.65s; }
+        .flow-item:nth-child(14) { animation-delay: 0.7s; }
+        .flow-item:nth-child(15) { animation-delay: 0.75s; }
+        .flow-item:nth-child(16) { animation-delay: 0.8s; }
+        .flow-item:nth-child(17) { animation-delay: 0.85s; }
+        .flow-item:nth-child(18) { animation-delay: 0.9s; }
+        .flow-item:nth-child(19) { animation-delay: 0.95s; }
+        .flow-item:nth-child(20) { animation-delay: 1s; }
+        .flow-item:nth-child(21) { animation-delay: 1.05s; }
+        .flow-item:nth-child(22) { animation-delay: 1.1s; }
+        .flow-item:nth-child(23) { animation-delay: 1.15s; }
+        .flow-item:nth-child(24) { animation-delay: 1.2s; }
+        .flow-item:nth-child(25) { animation-delay: 1.25s; }
+        .flow-item:nth-child(26) { animation-delay: 1.3s; }
+        .flow-item:nth-child(27) { animation-delay: 1.35s; }
+        .flow-item:nth-child(28) { animation-delay: 1.4s; }
+        .flow-item:nth-child(29) { animation-delay: 1.45s; }
+
+        .step-box {
+            background: white;
+            border: 3px solid #FF6600;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(255, 102, 0, 0.15);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .step-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(255, 102, 0, 0.25);
+        }
+
+        .step-box.start {
+            background: linear-gradient(135deg, #FF6600, #FF8533);
+            color: white;
+            border: none;
+        }
+
+        .step-box.end {
+            background: linear-gradient(135deg, #4CAF50, #66BB6A);
+            color: white;
+            border: none;
+        }
+
+        .step-number {
+            background: #FF6600;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-right: 15px;
+            box-shadow: 0 3px 8px rgba(255, 102, 0, 0.3);
+        }
+
+        .step-box.start .step-number,
+        .step-box.end .step-number {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .step-content {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .step-text {
+            flex: 1;
+        }
+
+        .step-text h3 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            color: #FF6600;
+        }
+
+        .step-box.start .step-text h3,
+        .step-box.end .step-text h3 {
+            color: white;
+        }
+
+        .step-text p {
+            font-size: 1.05em;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .step-box.start .step-text p,
+        .step-box.end .step-text p {
+            color: white;
+        }
+
+        .actor-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #FFE0B2;
+            color: #FF6600;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-top: 10px;
+            box-shadow: 0 2px 5px rgba(255, 102, 0, 0.15);
+        }
+
+        .step-box.start .actor-label,
+        .step-box.end .actor-label {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+
+        /* Arrow */
+        .arrow {
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 20px solid #FF6600;
+            margin: 5px auto;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* Note Box */
+        .note-box {
+            background: #FFF8F0;
+            border-left: 5px solid #FF6600;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-style: italic;
+            font-size: 0.95em;
+            color: #666;
+        }
+
+        .note-box::before {
+            content: '⏰ ';
+            font-style: normal;
+        }
+
+        .step-box.start .note-box,
+        .step-box.end .note-box {
+            background: rgba(255, 255, 255, 0.2);
+            border-left-color: white;
+            color: white;
+        }
+
+        /* Sub-steps */
+        .sub-steps {
+            margin-top: 15px;
+            padding-left: 20px;
+            border-left: 3px solid #FFE0B2;
+        }
+
+        .sub-step {
+            padding: 8px 0;
+            font-size: 0.95em;
+            color: #555;
+        }
+
+        .step-box.start .sub-step,
+        .step-box.end .sub-step {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .header p {
+                font-size: 1em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .info-section {
+                grid-template-columns: 1fr;
+            }
+
+            .warning-items {
+                grid-template-columns: 1fr;
+            }
+
+            .legend {
+                padding: 15px 20px;
+                gap: 15px;
+            }
+
+            .step-number {
+                width: 35px;
+                height: 35px;
+                font-size: 1em;
+            }
+
+            .step-text h3 {
+                font-size: 1.1em;
+            }
+
+            .step-text p {
+                font-size: 0.95em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>📝 SOP Ujian Tengah Semester (UTS)</h1>
+            <p>Fakultas Ilmu Sosial dan Ilmu Politik - Universitas Tadulako</p>
+        </div>
+
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-box start"></div>
+                <span>Langkah Awal</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box process"></div>
+                <span>Proses</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box end"></div>
+                <span>Selesai</span>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Warning Box -->
+            <div class="warning-box">
+                <h3>⚠️ CATATAN PENTING UTS</h3>
+                <div class="warning-items">
+                    <div class="warning-item">
+                        <strong>📅 Waktu:</strong> UTS dilaksanakan pada minggu ke-8 atau pertengahan semester
+                    </div>
+                    <div class="warning-item">
+                        <strong>📊 Komponen:</strong> Salah satu komponen penilaian sesuai kontrak perkuliahan
+                    </div>
+                    <div class="warning-item">
+                        <strong>✅ Kehadiran:</strong> Mahasiswa WAJIB hadir minimal 75% untuk ikut UTS
+                    </div>
+                    <div class="warning-item">
+                        <strong>🎫 Kartu Ujian:</strong> WAJIB membawa Kartu Ujian dan KTM saat UTS
+                    </div>
+                    <div class="warning-item">
+                        <strong>⏰ Keterlambatan:</strong> Maksimal 30 menit tanpa penambahan waktu
+                    </div>
+                    <div class="warning-item">
+                        <strong>🚫 Tidak Diperkenankan:</strong> Keterlambatan >30 menit TIDAK boleh ikut ujian
+                    </div>
+                    <div class="warning-item">
+                        <strong>📱 Dilarang:</strong> Membawa dan mengaktifkan handphone selama ujian
+                    </div>
+                    <div class="warning-item">
+                        <strong>⚖️ Sanksi:</strong> Pelanggaran tata tertib dikenakan sanksi sesuai tingkat
+                    </div>
+                    <div class="warning-item">
+                        <strong>❌ Kecurangan:</strong> Dapat mengakibatkan nilai ujian = E atau nilai MK = E
+                    </div>
+                    <div class="warning-item">
+                        <strong>✍️ Koreksi:</strong> Dosen WAJIB koreksi dan beri nilai maksimal 14 hari
+                    </div>
+                    <div class="warning-item">
+                        <strong>🔄 Ujian Susulan:</strong> Paling lambat 2 minggu setelah UTS
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Section -->
+            <div class="info-section">
+                <div class="info-box">
+                    <h3>👥 Pelaksana</h3>
+                    <ul>
+                        <li>Wakil Dekan Bidang Akademik</li>
+                        <li>Ketua Jurusan/Koordinator Prodi</li>
+                        <li>POKJA/Staf Sub Bagian Akademik</li>
+                        <li>Dosen Pengampu Mata Kuliah</li>
+                        <li>Pengawas Ujian</li>
+                        <li>Mahasiswa (peserta ujian)</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h3>📋 Syarat Mahasiswa</h3>
+                    <ul>
+                        <li>Terdaftar dalam DPK</li>
+                        <li>Kehadiran minimal 75%</li>
+                        <li>Status mahasiswa aktif</li>
+                        <li>Telah registrasi administrasi & akademik</li>
+                        <li>Memiliki Kartu Ujian dan KTM</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-box">
+                    <div class="time-icon">⏱️</div>
+                    <h3>Waktu Pelayanan</h3>
+                    <p>Maks. 10 Hari Kerja</p>
+                    <small style="color: #666; margin-top: 5px; display: block;">Persiapan hingga pelaksanaan</small>
+                    <small style="color: #666; margin-top: 5px; display: block;">+ 14 hari koreksi</small>
+                </div>
+            </div>
+
+            <!-- Flowchart -->
+            <div class="flowchart-container">
+                <!-- Step 1 -->
+                <div class="flow-item">
+                    <div class="step-box start">
+                        <div class="step-content">
+                            <div class="step-number">1</div>
+                            <div class="step-text">
+                                <h3>Pelaporan Rencana Pelaksanaan UTS</h3>
+                                <p>POKJA Akademik melaporkan rencana pelaksanaan UTS kepada Wakil Dekan Bidang Akademik berisi jadwal, persiapan yang diperlukan, dan koordinasi pelaksanaan</p>
+                                <div class="actor-label">
+                                    <span>📋</span>
+                                    <span>POKJA Akademik & Wakil Dekan</span>
+                                </div>
+                                <div class="note-box">
+                                    Waktu: 3-4 minggu sebelum UTS
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 2 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">2</div>
+                            <div class="step-text">
+                                <h3>Pembentukan Tim Panitia UTS</h3>
+                                <p>Wakil Dekan Bidang Akademik membentuk Tim Panitia Pelaksana UTS dengan pembagian tugas: Jurusan/Prodi (susun jadwal), POKJA Akademik (administrasi), POKJA Kepegawaian (SK), POKJA Umum (ATK dan ruang)</p>
+                                <div class="actor-label">
+                                    <span>👥</span>
+                                    <span>Wakil Dekan Bidang Akademik</span>
+                                </div>
+                                <div class="note-box">
+                                    Waktu: 3 minggu sebelum UTS
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 3 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">3</div>
+                            <div class="step-text">
+                                <h3>Penyusunan Jadwal UTS</h3>
+                                <p>Ketua Jurusan/Koordinator Prodi menyusun jadwal UTS memuat hari/tanggal, waktu, mata kuliah, dosen pengampu, ruangan dengan memastikan tidak ada jadwal bertabrakan dan mempertimbangkan kapasitas ruangan serta jumlah peserta</p>
+                                <div class="actor-label">
+                                    <span>📅</span>
+                                    <span>Ketua Jurusan/Koordinator Prodi</span>
+                                </div>
+                                <div class="note-box">
+                                    Waktu: 2-3 minggu sebelum UTS
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 4 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">4</div>
+                            <div class="step-text">
+                                <h3>Persetujuan Jadwal UTS</h3>
+                                <p>Jurusan/Prodi menyerahkan draft jadwal ke POKJA Akademik. POKJA memeriksa kelengkapan dan kebenaran jadwal, mengajukan ke Wakil Dekan untuk persetujuan. Setelah disetujui, jadwal menjadi jadwal resmi UTS</p>
+                                <div class="actor-label">
+                                    <span>✅</span>
+                                    <span>POKJA & Wakil Dekan Bidang Akademik</span>
+                                </div>
+                                <div class="note-box">
+                                    Waktu: 2 minggu sebelum UTS
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 5 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">5</div>
+                            <div class="step-text">
+                                <h3>Penggandaan dan Distribusi Jadwal</h3>
+                                <p>POKJA Akademik menyiapkan surat pengantar dan menggandakan jadwal sesuai kebutuhan. Mendistribusikan jadwal kepada dosen pengampu, pengawas ujian, jurusan/prodi, menempel di papan pengumuman dan mengunggah di sistem informasi</p>
+                                <div class="actor-label">
+                                    <span>📨</span>
+                                    <span>POKJA Akademik</span>
+                                </div>
+                                <div class="note-box">
+                                    Waktu: 10-14 hari sebelum UTS
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 6 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">6</div>
+                            <div class="step-text">
+                                <h3>Penyerahan Soal Ujian</h3>
+                                <p>Dosen Pengampu menyusun soal UTS sesuai capaian pembelajaran dan menyerahkan ke POKJA dalam amplop tertutup dilengkapi kode MK dan identitas pengampu. Dosen menandatangani formulir penyerahan soal</p>
+                                <div class="actor-label">
+                                    <span>📝</span>
+                                    <span>Dosen Pengampu & POKJA</span>
+                                </div>
+                                <div class="note-box">
+                                    Waktu: 7 hari sebelum UTS mata kuliah bersangkutan
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 7 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">7</div>
+                            <div class="step-text">
+                                <h3>Pencetakan Kartu Ujian</h3>
+                                <p>POKJA Akademik mencetak Kartu Ujian untuk setiap mahasiswa berdasarkan DPK, memverifikasi data mahasiswa yang memenuhi syarat kehadiran 75%, menyortir per jurusan/prodi, dan menyiapkan daftar penerimaan</p>
+                                <div class="actor-label">
+                                    <span>🎫</span>
+                                    <span>POKJA Akademik</span>
+                                </div>
+                                <div class="note-box">
+                                    Waktu: 5-7 hari sebelum UTS
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 8 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">8</div>
+                            <div class="step-text">
+                                <h3>Distribusi Kartu Ujian</h3>
+                                <p>POKJA mengumumkan pengambilan Kartu Ujian. Kartu didistribusikan melalui pengambilan langsung di Bagian Akademik atau penyerahan melalui ketua kelas/perwakilan mahasiswa. Mahasiswa menandatangani tanda terima</p>
+                                <div class="actor-label">
+                                    <span>📋</span>
+                                    <span>POKJA Akademik & Mahasiswa</span>
+                                </div>
+                                <div class="note-box">
+                                    Waktu: 3-5 hari sebelum UTS
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 9 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">9</div>
+                            <div class="step-text">
+                                <h3>Penggandaan Soal Ujian</h3>
+                                <p>POKJA menggandakan soal sesuai jumlah peserta (+10% cadangan), memasukkan soal ke amplop per MK dilengkapi label MK/tanggal/waktu/ruangan, daftar hadir, berita acara, lembar jawaban (jika perlu). Menyimpan amplop soal di tempat aman</p>
+                                <div class="actor-label">
+                                    <span>📦</span>
+                                    <span>POKJA Akademik</span>
+                                </div>
+                                <div class="note-box">
+                                    Waktu: 1-2 hari sebelum UTS mata kuliah bersangkutan
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 10 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">10</div>
+                            <div class="step-text">
+                                <h3>Distribusi Amplop Soal kepada Pengawas</h3>
+                                <p>Pengawas mengambil amplop soal ujian di POKJA 30 menit sebelum ujian, menandatangani tanda terima, memeriksa kelengkapan isi amplop, dan membawa amplop ke ruang ujian</p>
+                                <div class="actor-label">
+                                    <span>👮</span>
+                                    <span>Pengawas Ujian</span>
+                                </div>
+                                <div class="note-box">
+                                    Waktu: 30 menit sebelum ujian dimulai
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 11 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">11</div>
+                            <div class="step-text">
+                                <h3>Pelaksanaan Ujian dengan Pengawasan</h3>
+                                <p>Sebelum ujian (15 menit): mahasiswa masuk dengan Kartu Ujian dan KTM, pengawas periksa identitas, mahasiswa tempati tempat duduk, pengawas bacakan tata tertib dan bagikan soal. Selama ujian (90-120 menit): mahasiswa kerjakan soal, pengawas pantau, catat kehadiran, cegah kecurangan. Setelah ujian: pengawas umumkan selesai, mahasiswa serahkan jawaban, pengawas hitung lembar jawaban</p>
+                                <div class="actor-label">
+                                    <span>✍️</span>
+                                    <span>Mahasiswa & Pengawas Ujian</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 12 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">12</div>
+                            <div class="step-text">
+                                <h3>Pengumpulan dan Penyerahan Hasil Ujian</h3>
+                                <p>Pengawas menata dan mengurutkan lembar jawaban sesuai nomor urut/absen, memasukkan ke amplop beserta kelengkapan, melengkapi dan menandatangani berita acara, menyerahkan amplop hasil ujian ke POKJA. POKJA memberikan tanda terima</p>
+                                <div class="actor-label">
+                                    <span>📦</span>
+                                    <span>Pengawas & POKJA Akademik</span>
+                                </div>
+                                <div class="note-box">
+                                    Waktu: Segera setelah ujian (maksimal 1 jam)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 13 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">13</div>
+                            <div class="step-text">
+                                <h3>Penyerahan ke Dosen Pengampu</h3>
+                                <p>POKJA Akademik menghubungi dosen pengampu. Dosen mengambil hasil ujian di POKJA dan menandatangani tanda terima hasil ujian. POKJA mendokumentasikan penyerahan</p>
+                                <div class="actor-label">
+                                    <span>📨</span>
+                                    <span>POKJA & Dosen Pengampu</span>
+                                </div>
+                                <div class="note-box">
+                                    Waktu: 1 hari setelah pelaksanaan ujian
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 14 -->
+                <div class="flow-item">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">14</div>
+                            <div class="step-text">
+                                <h3>Koreksi dan Penilaian</h3>
+                                <p>Dosen Pengampu mengoreksi lembar jawaban mahasiswa, memberikan nilai UTS untuk setiap mahasiswa, mencatat nilai dalam daftar nilai, menganalisis hasil ujian (jika diperlukan), dan memberikan feedback kepada mahasiswa (jika diperlukan)</p>
+                                <div class="actor-label">
+                                    <span>✍️📊</span>
+                                    <span>Dosen Pengampu</span>
+                                </div>
+                                <div class="note-box">
+                                    Waktu: Maksimal 14 hari setelah pelaksanaan ujian
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 15 -->
+                <div class="flow-item">
+                    <div class="step-box end">
+                        <div class="step-content">
+                            <div class="step-number">15</div>
+                            <div class="step-text">
+                                <h3>Penyimpanan Dokumentasi</h3>
+                                <p>Dosen Pengampu menyimpan nilai UTS sebagai komponen nilai akhir mata kuliah, mendokumentasikan soal ujian dan kunci jawaban, menyimpan lembar jawaban mahasiswa. Arsip disimpan minimal sampai akhir semester</p>
+                                <div class="actor-label">
+                                    <span>📁</span>
+                                    <span>Dosen Pengampu</span>
+                                </div>
+                                <div class="note-box">
+                                    Nilai UTS menjadi komponen dalam perhitungan nilai akhir MK
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Info -->
+            <div style="margin-top: 50px; padding: 30px; background: linear-gradient(135deg, #FFE0B2 0%, #FFCC80 100%); border-radius: 15px; border: 2px solid #FF6600;">
+                <h3 style="color: #FF6600; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-size: 1.4em;">
+                    <span>📌</span>
+                    <span>Tahapan Pelaksanaan UTS</span>
+                </h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
+                    <div style="background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #FF6600;">
+                        <strong style="color: #FF6600; font-size: 1.1em;">📋 Persiapan (3-4 minggu):</strong><br><br>
+                        <span style="color: #333;">Perencanaan, pembentukan panitia, penyusunan jadwal</span>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #FF6600;">
+                        <strong style="color: #FF6600; font-size: 1.1em;">📝 Administrasi (1-2 minggu):</strong><br><br>
+                        <span style="color: #333;">Soal ujian, kartu ujian, penggandaan soal</span>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #FF6600;">
+                        <strong style="color: #FF6600; font-size: 1.1em;">✍️ Pelaksanaan (90-120 menit):</strong><br><br>
+                        <span style="color: #333;">Ujian dengan pengawasan pada minggu ke-8</span>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #FF6600;">
+                        <strong style="color: #FF6600; font-size: 1.1em;">📊 Penilaian (14 hari):</strong><br><br>
+                        <span style="color: #333;">Koreksi dan penilaian sebagai komponen nilai akhir</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Info -->
+            <div style="margin-top: 30px; padding: 30px; background: #FFF3E6; border-radius: 15px; border-left: 5px solid #FF6600;">
+                <h3 style="color: #FF6600; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                    <span>📚</span>
+                    <span>Referensi</span>
+                </h3>
+                <ul style="list-style: none; padding: 0; line-height: 1.8;">
+                    <li style="padding: 5px 0;">✓ UU Nomor 12 Tahun 2012 tentang Pendidikan Tinggi</li>
+                    <li style="padding: 5px 0;">✓ Permendikbud Nomor 3 Tahun 2020 tentang Standar Nasional Pendidikan Tinggi</li>
+                    <li style="padding: 5px 0;">✓ Pedoman dan Peraturan Akademik Universitas Tadulako Tahun 2024-2025</li>
+                    <li style="padding: 5px 0;">✓ Panduan Akademik FISIP Universitas Tadulako Tahun 2024-2025</li>
+                    <li style="padding: 5px 0;">✓ Kalender Akademik Universitas Tadulako</li>
+                </ul>
+                <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #FFE0B2;">
+                    <p style="text-align: center; color: #666; margin-bottom: 10px;"><strong>Tanggal Pembuatan:</strong> 28 November 2025 | <strong>Revisi:</strong> Rev. 0</p>
+                    <p style="text-align: center; color: #666; font-size: 0.95em;">
+                        📞 Untuk pertanyaan atau kendala, hubungi Koordinator Program Studi atau Sub Bagian Akademik FISIP
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add smooth scroll behavior and animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate elements on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateX(0)';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.flow-item').forEach(item => {
+                observer.observe(item);
+            });
+        });
+    </script>
+</body>
+</html>
