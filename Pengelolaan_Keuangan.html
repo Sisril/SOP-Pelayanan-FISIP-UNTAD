@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual Prosedur Pengelolaan Keuangan FISIP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FFF8F0 0%, #FFE0B2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(255, 102, 0, 0.15);
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #FF6600 0%, #FF8533 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 15s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            position: relative;
+            z-index: 1;
+            opacity: 0.95;
+        }
+
+        /* Legend */
+        .legend {
+            background: #FFF3E6;
+            padding: 20px 40px;
+            border-bottom: 3px solid #FFE0B2;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95em;
+        }
+
+        .legend-box {
+            width: 40px;
+            height: 30px;
+            border-radius: 8px;
+            border: 2px solid #FF6600;
+        }
+
+        .legend-box.start {
+            background: linear-gradient(135deg, #FF6600, #FF8533);
+        }
+
+        .legend-box.process {
+            background: white;
+        }
+
+        .legend-box.end {
+            background: linear-gradient(135deg, #4CAF50, #66BB6A);
+        }
+
+        /* Content */
+        .content {
+            padding: 40px;
+        }
+
+        /* Warning Box */
+        .warning-box {
+            background: linear-gradient(135deg, #FFE0B2 0%, #FFCC80 100%);
+            border: 2px solid #FF6600;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(255, 102, 0, 0.15);
+        }
+
+        .warning-box h3 {
+            color: #FF6600;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .warning-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .warning-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #FF6600;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        /* Fase Box */
+        .fase-box {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            border: 2px solid #4CAF50;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.15);
+        }
+
+        .fase-box h3 {
+            color: #4CAF50;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .fase-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 15px;
+        }
+
+        .fase-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #4CAF50;
+            font-size: 0.95em;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        /* Info Boxes */
+        .info-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .info-box {
+            background: #FFF3E6;
+            border-left: 5px solid #FF6600;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(255, 102, 0, 0.1);
+        }
+
+        .info-box h3 {
+            color: #FF6600;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-box li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            font-size: 1.05em;
+            line-height: 1.6;
+        }
+
+        .info-box li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #FF6600;
+            font-weight: bold;
+        }
+
+        /* Phase Header */
+        .phase-header {
+            background: linear-gradient(135deg, #4CAF50, #66BB6A);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            margin: 40px 0 20px 0;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .phase-header:first-of-type {
+            margin-top: 20px;
+        }
+
+        /* Flowchart */
+        .flowchart-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .flow-item {
+            width: 100%;
+            max-width: 700px;
+            position: relative;
+            animation: slideIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .step-box {
+            background: white;
+            border: 3px solid #FF6600;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(255, 102, 0, 0.15);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .step-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(255, 102, 0, 0.25);
+        }
+
+        .step-box.start {
+            background: linear-gradient(135deg, #FF6600, #FF8533);
+            color: white;
+            border: none;
+        }
+
+        .step-box.phase-start {
+            background: linear-gradient(135deg, #4CAF50, #66BB6A);
+            color: white;
+            border: 3px solid #4CAF50;
+        }
+
+        .step-number {
+            background: #FF6600;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-right: 15px;
+            box-shadow: 0 3px 8px rgba(255, 102, 0, 0.3);
+        }
+
+        .step-box.start .step-number,
+        .step-box.phase-start .step-number {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .step-content {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .step-text {
+            flex: 1;
+        }
+
+        .step-text h3 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            color: #FF6600;
+        }
+
+        .step-box.start .step-text h3,
+        .step-box.phase-start .step-text h3 {
+            color: white;
+        }
+
+        .step-text p {
+            font-size: 1.05em;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .step-box.start .step-text p,
+        .step-box.phase-start .step-text p {
+            color: white;
+        }
+
+        .actor-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #FFE0B2;
+            color: #FF6600;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-top: 10px;
+            box-shadow: 0 2px 5px rgba(255, 102, 0, 0.15);
+        }
+
+        .step-box.start .actor-label,
+        .step-box.phase-start .actor-label {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+
+        /* Arrow */
+        .arrow {
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 20px solid #FF6600;
+            margin: 5px auto;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .arrow.green {
+            border-top-color: #4CAF50;
+        }
+
+        /* Note Box */
+        .note-box {
+            background: #FFF8F0;
+            border-left: 5px solid #FF6600;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-style: italic;
+            font-size: 0.95em;
+            color: #666;
+        }
+
+        .note-box::before {
+            content: '⏰ ';
+            font-style: normal;
+        }
+
+        .step-box.start .note-box,
+        .step-box.phase-start .note-box {
+            background: rgba(255, 255, 255, 0.2);
+            border-left-color: white;
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .header p {
+                font-size: 1em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .info-section {
+                grid-template-columns: 1fr;
+            }
+
+            .warning-items {
+                grid-template-columns: 1fr;
+            }
+
+            .fase-items {
+                grid-template-columns: 1fr;
+            }
+
+            .legend {
+                padding: 15px 20px;
+                gap: 15px;
+            }
+
+            .step-number {
+                width: 35px;
+                height: 35px;
+                font-size: 1em;
+            }
+
+            .step-text h3 {
+                font-size: 1.1em;
+            }
+
+            .step-text p {
+                font-size: 0.95em;
+            }
+
+            .phase-header {
+                font-size: 1.2em;
+                padding: 15px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>💰 Manual Prosedur Pengelolaan Keuangan</h1>
+            <p>Fakultas Ilmu Sosial dan Ilmu Politik - Universitas Tadulako</p>
+        </div>
+
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-box start"></div>
+                <span>Fase Awal</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box process"></div>
+                <span>Proses</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box end"></div>
+                <span>Fase</span>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Fase Box -->
+            <div class="fase-box">
+                <h3>📊 ENAM FASE PENGELOLAAN KEUANGAN</h3>
+                <div class="fase-items">
+                    <div class="fase-item">
+                        <strong style="font-size: 1.5em;">📋</strong><br>
+                        <strong>Fase A</strong><br>Perencanaan & Penyusunan Anggaran
+                    </div>
+                    <div class="fase-item">
+                        <strong style="font-size: 1.5em;">💵</strong><br>
+                        <strong>Fase B</strong><br>Penerimaan & Pembukuan Dana
+                    </div>
+                    <div class="fase-item">
+                        <strong style="font-size: 1.5em;">💸</strong><br>
+                        <strong>Fase C</strong><br>Pengeluaran & Pencairan Dana
+                    </div>
+                    <div class="fase-item">
+                        <strong style="font-size: 1.5em;">📝</strong><br>
+                        <strong>Fase D</strong><br>Pertanggungjawaban Penggunaan
+                    </div>
+                    <div class="fase-item">
+                        <strong style="font-size: 1.5em;">📊</strong><br>
+                        <strong>Fase E</strong><br>Pelaporan Keuangan
+                    </div>
+                    <div class="fase-item">
+                        <strong style="font-size: 1.5em;">📁</strong><br>
+                        <strong>Fase F</strong><br>Pengarsipan Dokumen
+                    </div>
+                </div>
+            </div>
+
+            <!-- Warning Box -->
+            <div class="warning-box">
+                <h3>⚠️ KETENTUAN WAKTU PENTING</h3>
+                <div class="warning-items">
+                    <div class="warning-item">
+                        <strong>📅 Penyusunan RKAT:</strong> Maksimal 30 hari kalender
+                    </div>
+                    <div class="warning-item">
+                        <strong>⏱️ Pencairan Dana:</strong> Maksimal 7 hari kerja setelah permohonan lengkap
+                    </div>
+                    <div class="warning-item">
+                        <strong>📋 Penyerahan LPJ:</strong> Maksimal 14 hari setelah kegiatan selesai
+                    </div>
+                    <div class="warning-item">
+                        <strong>📊 Laporan Bulanan:</strong> Paling lambat tanggal 5 bulan berikutnya
+                    </div>
+                    <div class="warning-item">
+                        <strong>📈 Laporan Tahunan:</strong> Sesuai ketentuan Universitas
+                    </div>
+                    <div class="warning-item">
+                        <strong>📁 Pengarsipan:</strong> Minimal 5 tahun untuk audit
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Section -->
+            <div class="info-section">
+                <div class="info-box">
+                    <h3>👥 Pelaksana</h3>
+                    <ul>
+                        <li>Unit Kerja/Pemohon Dana</li>
+                        <li>POKJA Keuangan dan Kepegawaian</li>
+                        <li>KABAG</li>
+                        <li>Wakil Dekan Bidang Keuangan (Wadek Keu)</li>
+                        <li>Dekan</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h3>📋 Pengguna</h3>
+                    <ul>
+                        <li>Seluruh unit kerja di lingkungan FISIP Untad</li>
+                        <li>Pimpinan Fakultas</li>
+                        <li>Bendahara dan pengelola keuangan</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h3>🎯 Prinsip</h3>
+                    <ul>
+                        <li>Efisien dan Efektif</li>
+                        <li>Transparan</li>
+                        <li>Akuntabel</li>
+                        <li>Sesuai Tata Kelola Keuangan</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- FASE A: PERENCANAAN DAN PENYUSUNAN ANGGARAN -->
+            <div class="phase-header">
+                📋 FASE A: PERENCANAAN DAN PENYUSUNAN ANGGARAN
+            </div>
+
+            <div class="flowchart-container">
+                <!-- Step 1 -->
+                <div class="flow-item" style="animation-delay: 0.05s;">
+                    <div class="step-box phase-start">
+                        <div class="step-content">
+                            <div class="step-number">1</div>
+                            <div class="step-text">
+                                <h3>Penyusunan RKAT oleh Unit Kerja</h3>
+                                <p>Unit kerja menyusun Rencana Kebutuhan Anggaran Tahunan (RKAT) berdasarkan program kerja dan menyerahkan kepada POKJA Keuangan</p>
+                                <div class="actor-label">
+                                    <span>📝</span>
+                                    <span>Unit Kerja</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow green"></div>
+
+                <!-- Step 2 -->
+                <div class="flow-item" style="animation-delay: 0.1s;">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">2</div>
+                            <div class="step-text">
+                                <h3>Penghimpunan dan Konsolidasi RKAT</h3>
+                                <p>POKJA Keuangan menghimpun, mengkaji, dan mengkonsolidasikan usulan RKAT dari seluruh unit kerja</p>
+                                <div class="actor-label">
+                                    <span>📊</span>
+                                    <span>POKJA Keuangan</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 3 -->
+                <div class="flow-item" style="animation-delay: 0.15s;">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">3</div>
+                            <div class="step-text">
+                                <h3>Penyusunan Draft RKAT Fakultas</h3>
+                                <p>POKJA Keuangan menyusun draft RKAT Fakultas dan menyerahkan kepada KABAG untuk ditelaah</p>
+                                <div class="actor-label">
+                                    <span>📋</span>
+                                    <span>POKJA Keuangan</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 4 -->
+                <div class="flow-item" style="animation-delay: 0.2s;">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">4</div>
+                            <div class="step-text">
+                                <h3>Penelitian Draft RKAT</h3>
+                                <p>KABAG meneliti draft RKAT dan berkoordinasi dengan Wadek Keu untuk penyesuaian dengan pagu anggaran</p>
+                                <div class="actor-label">
+                                    <span>🔍</span>
+                                    <span>KABAG</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 5 -->
+                <div class="flow-item" style="animation-delay: 0.25s;">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">5</div>
+                            <div class="step-text">
+                                <h3>Finalisasi RKAT</h3>
+                                <p>Wadek Keu melakukan finalisasi RKAT dan mengajukan kepada Dekan untuk mendapat persetujuan</p>
+                                <div class="actor-label">
+                                    <span>✅</span>
+                                    <span>Wadek Keu</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 6 -->
+                <div class="flow-item" style="animation-delay: 0.3s;">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">6</div>
+                            <div class="step-text">
+                                <h3>Persetujuan dan Penyampaian ke Universitas</h3>
+                                <p>Dekan menyetujui RKAT Fakultas dan menugaskan Wadek Keu untuk menyampaikan ke Universitas</p>
+                                <div class="actor-label">
+                                    <span>📨</span>
+                                    <span>Dekan & Wadek Keu</span>
+                                </div>
+                                <div class="note-box">
+                                    Maksimal 30 hari kalender
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FASE B: PENERIMAAN DAN PEMBUKUAN DANA -->
+            <div class="phase-header">
+                💵 FASE B: PENERIMAAN DAN PEMBUKUAN DANA
+            </div>
+
+            <div class="flowchart-container">
+                <!-- Step 7 -->
+                <div class="flow-item" style="animation-delay: 0.35s;">
+                    <div class="step-box phase-start">
+                        <div class="step-content">
+                            <div class="step-number">7</div>
+                            <div class="step-text">
+                                <h3>Penerimaan Notifikasi Dana</h3>
+                                <p>POKJA Keuangan menerima notifikasi penerimaan dana dari Universitas atau sumber lain yang sah</p>
+                                <div class="actor-label">
+                                    <span>📬</span>
+                                    <span>POKJA Keuangan</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow green"></div>
+
+                <!-- Step 8 -->
+                <div class="flow-item" style="animation-delay: 0.4s;">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">8</div>
+                            <div class="step-text">
+                                <h3>Pencatatan Penerimaan Dana</h3>
+                                <p>POKJA Keuangan mencatat penerimaan dana dalam buku kas umum dan buku kontrol masing-masing sumber dana sesuai pos anggaran</p>
+                                <div class="actor-label">
+                                    <span>📖</span>
+                                    <span>POKJA Keuangan</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 9 -->
+                <div class="flow-item" style="animation-delay: 0.45s;">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">9</div>
+                            <div class="step-text">
+                                <h3>Pembuatan Laporan Posisi Dana</h3>
+                                <p>POKJA Keuangan membuat laporan posisi dana dan menyampaikan kepada KABAG untuk diketahui</p>
+                                <div class="actor-label">
+                                    <span>📊</span>
+                                    <span>POKJA Keuangan</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 10 -->
+                <div class="flow-item" style="animation-delay: 0.5s;">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">10</div>
+                            <div class="step-text">
+                                <h3>Penyampaian Informasi Posisi Dana</h3>
+                                <p>KABAG meneruskan informasi posisi dana kepada Wadek Keu dan Dekan</p>
+                                <div class="actor-label">
+                                    <span>📧</span>
+                                    <span>KABAG</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FASE C: PENGELUARAN DAN PENCAIRAN DANA -->
+            <div class="phase-header">
+                💸 FASE C: PENGELUARAN DAN PENCAIRAN DANA
+            </div>
+
+            <div class="flowchart-container">
+                <!-- Step 11 -->
+                <div class="flow-item" style="animation-delay: 0.55s;">
+                    <div class="step-box phase-start">
+                        <div class="step-content">
+                            <div class="step-number">11</div>
+                            <div class="step-text">
+                                <h3>Pengajuan Permohonan Pencairan</h3>
+                                <p>Unit kerja mengajukan permohonan pencairan dana kepada Wadek Keu melalui POKJA Keuangan dengan melampirkan proposal kegiatan, RAB, dan TOR</p>
+                                <div class="actor-label">
+                                    <span>📝</span>
+                                    <span>Unit Kerja</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow green"></div>
+
+                <!-- Step 12 -->
+                <div class="flow-item" style="animation-delay: 0.6s;">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">12</div>
+                            <div class="step-text">
+                                <h3>Verifikasi Dokumen</h3>
+                                <p>POKJA Keuangan memverifikasi kelengkapan dokumen, kesesuaian dengan RKAT, dan ketersediaan dana pada pos anggaran yang dimohon</p>
+                                <div class="actor-label">
+                                    <span>✅</span>
+                                    <span>POKJA Keuangan</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 13 -->
+                <div class="flow-item" style="animation-delay: 0.65s;">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">13</div>
+                            <div class="step-text">
+                                <h3>Penyusunan Rekomendasi</h3>
+                                <p>POKJA Keuangan menyusun rekomendasi dan menyerahkan kepada KABAG untuk ditelaah</p>
+                                <div class="actor-label">
+                                    <span>📋</span>
+                                    <span>POKJA Keuangan</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 14 -->
+                <div class="flow-item" style="animation-delay: 0.7s;">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">14</div>
+                            <div class="step-text">
+                                <h3>Penelitian dan Penerusan</h3>
+                                <p>KABAG meneliti permohonan dan meneruskan kepada Wadek Keu dengan rekomendasi persetujuan atau penolakan</p>
+                                <div class="actor-label">
+                                    <span>🔍</span>
+                                    <span>KABAG</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 15 -->
+                <div class="flow-item" style="animation-delay: 0.75s;">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">15</div>
+                            <div class="step-text">
+                                <h3>Persetujuan Wadek Keu</h3>
+                                <p>Wadek Keu meninjau permohonan dan memberikan persetujuan pencairan dana dengan paraf pada dokumen</p>
+                                <div class="actor-label">
+                                    <span>✍️</span>
+                                    <span>Wadek Keu</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 16 -->
+                <div class="flow-item" style="animation-delay: 0.8s;">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">16</div>
+                            <div class="step-text">
+                                <h3>Penandatanganan oleh Dekan</h3>
+                                <p>Dekan menandatangani surat perintah pencairan dana (jika nominal melebihi batas kewenangan Wadek Keu)</p>
+                                <div class="actor-label">
+                                    <span>✅</span>
+                                    <span>Dekan</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 17 -->
+                <div class="flow-item" style="animation-delay: 0.85s;">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">17</div>
+                            <div class="step-text">
+                                <h3>Pencairan Dana</h3>
+                                <p>POKJA Keuangan melakukan pencairan dana melalui transfer atau tunai kepada unit kerja pemohon</p>
+                                <div class="actor-label">
+                                    <span>💰</span>
+                                    <span>POKJA Keuangan</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 18 -->
+                <div class="flow-item" style="animation-delay: 0.9s;">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">18</div>
+                            <div class="step-text">
+                                <h3>Tanda Terima Dana</h3>
+                                <p>Unit kerja menandatangani tanda terima dana sebagai bukti pencairan</p>
+                                <div class="actor-label">
+                                    <span>✍️</span>
+                                    <span>Unit Kerja</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 19 -->
+                <div class="flow-item" style="animation-delay: 0.95s;">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">19</div>
+                            <div class="step-text">
+                                <h3>Pencatatan Pengeluaran</h3>
+                                <p>POKJA Keuangan mencatat pengeluaran dana dalam buku kas umum dan mengarsipkan bukti pencairan</p>
+                                <div class="actor-label">
+                                    <span>📖</span>
+                                    <span>POKJA Keuangan</span>
+                                </div>
+                                <div class="note-box">
+                                    Maksimal 7 hari kerja setelah permohonan lengkap
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FASE D: PERTANGGUNGJAWABAN PENGGUNAAN DANA -->
+            <div class="phase-header">
+                📝 FASE D: PERTANGGUNGJAWABAN PENGGUNAAN DANA
+            </div>
+
+            <div class="flowchart-container">
+                <!-- Step 20 -->
+                <div class="flow-item" style="animation-delay: 1s;">
+                    <div class="step-box phase-start">
+                        <div class="step-content">
+                            <div class="step-number">20</div>
+                            <div class="step-text">
+                                <h3>Penyusunan LPJ</h3>
+                                <p>Unit kerja menyusun Laporan Pertanggungjawaban (LPJ) penggunaan dana maksimal 14 hari setelah kegiatan selesai, dengan melampirkan bukti pengeluaran yang sah</p>
+                                <div class="actor-label">
+                                    <span>📝</span>
+                                    <span>Unit Kerja</span>
+                                </div>
+                                <div class="note-box">
+                                    Maksimal 14 hari setelah kegiatan selesai
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow green"></div>
+
+                <!-- Step 21 -->
+                <div class="flow-item" style="animation-delay: 1.05s;">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">21</div>
+                            <div class="step-text">
+                                <h3>Verifikasi LPJ</h3>
+                                <p>POKJA Keuangan memverifikasi kelengkapan dan keabsahan dokumen LPJ serta kesesuaian realisasi dengan RAB yang disetujui</p>
+                                <div class="actor-label">
+                                    <span>✅</span>
+                                    <span>POKJA Keuangan</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 22 -->
+                <div class="flow-item" style="animation-delay: 1.1s;">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">22</div>
+                            <div class="step-text">
+                                <h3>Berita Acara Verifikasi</h3>
+                                <p>POKJA Keuangan membuat berita acara verifikasi LPJ dan menyerahkan kepada KABAG</p>
+                                <div class="actor-label">
+                                    <span>📋</span>
+                                    <span>POKJA Keuangan</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 23 -->
+                <div class="flow-item" style="animation-delay: 1.15s;">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">23</div>
+                            <div class="step-text">
+                                <h3>Penelitian dan Penerusan LPJ</h3>
+                                <p>KABAG meneliti LPJ dan meneruskan kepada Wadek Keu untuk mendapat pengesahan</p>
+                                <div class="actor-label">
+                                    <span>🔍</span>
+                                    <span>KABAG</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 24 -->
+                <div class="flow-item" style="animation-delay: 1.2s;">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">24</div>
+                            <div class="step-text">
+                                <h3>Pengesahan LPJ</h3>
+                                <p>Wadek Keu mengesahkan LPJ dengan memberikan paraf dan tanda tangan pada dokumen</p>
+                                <div class="actor-label">
+                                    <span>✍️</span>
+                                    <span>Wadek Keu</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 25 -->
+                <div class="flow-item" style="animation-delay: 1.25s;">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">25</div>
+                            <div class="step-text">
+                                <h3>Pengarsipan LPJ</h3>
+                                <p>POKJA Keuangan mengarsipkan LPJ yang telah disahkan sebagai dokumen pertanggungjawaban keuangan</p>
+                                <div class="actor-label">
+                                    <span>📁</span>
+                                    <span>POKJA Keuangan</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FASE E: PELAPORAN KEUANGAN -->
+            <div class="phase-header">
+                📊 FASE E: PELAPORAN KEUANGAN
+            </div>
+
+            <div class="flowchart-container">
+                <!-- Step 26 -->
+                <div class="flow-item" style="animation-delay: 1.3s;">
+                    <div class="step-box phase-start">
+                        <div class="step-content">
+                            <div class="step-number">26</div>
+                            <div class="step-text">
+                                <h3>Penyusunan Laporan Bulanan</h3>
+                                <p>POKJA Keuangan menyusun laporan posisi keuangan bulanan yang memuat saldo awal, penerimaan, pengeluaran, dan saldo akhir untuk setiap sumber dana</p>
+                                <div class="actor-label">
+                                    <span>📊</span>
+                                    <span>POKJA Keuangan</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow green"></div>
+
+                <!-- Step 27 -->
+                <div class="flow-item" style="animation-delay: 1.35s;">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">27</div>
+                            <div class="step-text">
+                                <h3>Penyampaian Laporan Bulanan</h3>
+                                <p>POKJA Keuangan menyampaikan laporan bulanan kepada KABAG setiap akhir bulan paling lambat tanggal 5 bulan berikutnya</p>
+                                <div class="actor-label">
+                                    <span>📧</span>
+                                    <span>POKJA Keuangan</span>
+                                </div>
+                                <div class="note-box">
+                                    Paling lambat tanggal 5 bulan berikutnya
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 28 -->
+                <div class="flow-item" style="animation-delay: 1.4s;">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">28</div>
+                            <div class="step-text">
+                                <h3>Penelitian dan Penerusan Laporan</h3>
+                                <p>KABAG meneliti laporan dan menyampaikan kepada Wadek Keu dan Dekan untuk diketahui</p>
+                                <div class="actor-label">
+                                    <span>📨</span>
+                                    <span>KABAG</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 29 -->
+                <div class="flow-item" style="animation-delay: 1.45s;">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">29</div>
+                            <div class="step-text">
+                                <h3>Penyusunan Laporan Tahunan</h3>
+                                <p>POKJA Keuangan menyusun laporan keuangan tahunan yang telah diaudit dan menyampaikan kepada Wadek Keu melalui KABAG</p>
+                                <div class="actor-label">
+                                    <span>📈</span>
+                                    <span>POKJA Keuangan</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 30 -->
+                <div class="flow-item" style="animation-delay: 1.5s;">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">30</div>
+                            <div class="step-text">
+                                <h3>Penyampaian ke Dekan</h3>
+                                <p>Wadek Keu menyampaikan laporan keuangan tahunan kepada Dekan untuk mendapat pengesahan</p>
+                                <div class="actor-label">
+                                    <span>📧</span>
+                                    <span>Wadek Keu</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 31 -->
+                <div class="flow-item" style="animation-delay: 1.55s;">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">31</div>
+                            <div class="step-text">
+                                <h3>Pengesahan dan Penyampaian ke Universitas</h3>
+                                <p>Dekan mengesahkan laporan keuangan tahunan dan menugaskan Wadek Keu untuk menyampaikan ke Universitas</p>
+                                <div class="actor-label">
+                                    <span>✅</span>
+                                    <span>Dekan & Wadek Keu</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FASE F: PENGARSIPAN DOKUMEN KEUANGAN -->
+            <div class="phase-header">
+                📁 FASE F: PENGARSIPAN DOKUMEN KEUANGAN
+            </div>
+
+            <div class="flowchart-container">
+                <!-- Step 32 -->
+                <div class="flow-item" style="animation-delay: 1.6s;">
+                    <div class="step-box phase-start">
+                        <div class="step-content">
+                            <div class="step-number">32</div>
+                            <div class="step-text">
+                                <h3>Pengarsipan Dokumen</h3>
+                                <p>POKJA Keuangan mengarsipkan semua dokumen keuangan dalam file khusus yang tersusun rapi berdasarkan sumber dana dan kronologis waktu</p>
+                                <div class="actor-label">
+                                    <span>📁</span>
+                                    <span>POKJA Keuangan</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow green"></div>
+
+                <!-- Step 33 -->
+                <div class="flow-item" style="animation-delay: 1.65s;">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">33</div>
+                            <div class="step-text">
+                                <h3>Dokumen yang Wajib Diarsipkan</h3>
+                                <p>Dokumen yang wajib diarsipkan meliputi: bukti penerimaan dan pengeluaran dana, kuitansi, LPJ, surat perintah pencairan, dan laporan keuangan</p>
+                                <div class="actor-label">
+                                    <span>📋</span>
+                                    <span>POKJA Keuangan</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 34 -->
+                <div class="flow-item" style="animation-delay: 1.7s;">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">34</div>
+                            <div class="step-text">
+                                <h3>Penyimpanan Arsip</h3>
+                                <p>POKJA Keuangan menyimpan arsip dokumen keuangan minimal 5 tahun untuk keperluan audit dan pemeriksaan</p>
+                                <div class="actor-label">
+                                    <span>🗄️</span>
+                                    <span>POKJA Keuangan</span>
+                                </div>
+                                <div class="note-box">
+                                    Minimal 5 tahun untuk audit
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <!-- Step 35 -->
+                <div class="flow-item" style="animation-delay: 1.75s;">
+                    <div class="step-box">
+                        <div class="step-content">
+                            <div class="step-number">35</div>
+                            <div class="step-text">
+                                <h3>Monitoring dan Evaluasi</h3>
+                                <p>KABAG melakukan monitoring dan evaluasi berkala terhadap sistem pengarsipan dokumen keuangan</p>
+                                <div class="actor-label">
+                                    <span>📊</span>
+                                    <span>KABAG</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Info -->
+            <div style="margin-top: 30px; padding: 30px; background: #FFF3E6; border-radius: 15px; border-left: 5px solid #FF6600;">
+                <h3 style="color: #FF6600; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                    <span>📚</span>
+                    <span>Referensi</span>
+                </h3>
+                <ul style="list-style: none; padding: 0; line-height: 1.8;">
+                    <li style="padding: 5px 0;">✓ Statuta Universitas Tadulako</li>
+                    <li style="padding: 5px 0;">✓ Panduan Akademik FISIP Universitas Tadulako 2024-2025</li>
+                    <li style="padding: 5px 0;">✓ Peraturan Menteri Keuangan tentang Pengelolaan Keuangan Negara</li>
+                    <li style="padding: 5px 0;">✓ Peraturan Rektor tentang Pengelolaan Keuangan</li>
+                </ul>
+                <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #FFE0B2;">
+                    <p style="text-align: center; color: #666; margin-bottom: 10px;"><strong>Tanggal Pembuatan:</strong> 30 November 2025 | <strong>Revisi:</strong> Rev. 1</p>
+                    <p style="text-align: center; color: #666; font-size: 0.95em;">
+                        📞 Untuk pertanyaan atau kendala, hubungi POKJA Keuangan atau KABAG FISIP
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add smooth scroll behavior and animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate elements on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateX(0)';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.flow-item').forEach(item => {
+                observer.observe(item);
+            });
+        });
+    </script>
+</body>
+</html>
